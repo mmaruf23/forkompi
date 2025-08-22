@@ -7,7 +7,7 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   return (
     // sementara nanti edit aja
-    <div className="h-svh flex flex-col justify-center items-center">
+    <div className="min-h-svh">
       <Navbar />
       <main className="grow flex items-center">{children}</main>
       <Footer />
