@@ -133,3 +133,10 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .text-outline {
+    -webkit-text-stroke: 1px red;
+    -webkit-text-fill-color: white;
+  }
+}
