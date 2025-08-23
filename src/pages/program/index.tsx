@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const ProgranPage = () => {
-  return (
-    <div>ProgranPage</div>
-  )
-}
+  return <div className="h-[200svh]">ProgranPage</div>;
+};
 
-export default ProgranPage
+export default ProgranPage;
