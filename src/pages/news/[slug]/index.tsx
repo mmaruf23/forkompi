@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const NewsDetailPage = () => {
-  return (
-    <div>NewsDetailPage</div>
-  )
-}
+  return <div className="h-[200svh]">NewsDetailPage</div>;
+};
 
-export default NewsDetailPage
+export default NewsDetailPage;

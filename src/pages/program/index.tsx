@@ -1,9 +1,16 @@
-import React from 'react'
+import Hero from "@/components/ui/hero";
+import React from "react";
 
 const ProgranPage = () => {
   return (
-    <div>ProgranPage</div>
-  )
-}
+    <div className="h-[200svh] w-full">
+      <Hero
+        title="program"
+        descp="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, tenetur."
+        image="/hero-background-2.png"
+      />
+    </div>
+  );
+};
 
-export default ProgranPage
+export default ProgranPage;
