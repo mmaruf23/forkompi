@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import React from "react";
 
 /**
@@ -8,7 +8,7 @@ import React from "react";
  * @returns
  */
 type ImageShadowedProps = {
-  src: string;
+  src: StaticImageData;
   width: number;
   height: number;
   value: number;

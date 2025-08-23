@@ -1,13 +1,21 @@
 import React from "react";
 
-const Hero = () => {
-  // miringin bagian bawahnya pake clip-path(polygon)? atau mask-clip ? atau ? ahh gak ah
+type HeroProps = {
+  title: string;
+  descp: string;
+  image: string;
+};
+
+const Hero = ({ title, descp, image }: HeroProps) => {
   return (
-    <div className="relative flex justify-center items-center w-full h-svh bg-no-repeat bg-cover bg-[url(/hero-backgroud-resize.png)]">
-      <div className="absolute inset-0 bg-white/30"></div>
+    <div
+      className={`relative flex justify-center items-center w-full h-svh bg-no-repeat bg-cover bg-[url(${image})]`}
+      style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 75%, 0 95%)" }}
+    >
+      <div className="absolute inset-0 bg-white/50"></div>
       <div className="z-20 text-red-700">
-        <h1 className="uppercase text-center text-7xl font-bold mb-5">forkompi</h1>
-        <h1 className="">Forum Komunikasi Mahasiswa Poltekes Kemenkes Se-Indonesia</h1>
+        <h1 className="uppercase text-center text-7xl font-bold mb-5">{title}</h1>
+        <h1 className="font-semibold">{descp}</h1>
       </div>
     </div>
   );
