@@ -1,4 +1,4 @@
-export type InsertQuery = {
+export type ResultSetHeader = {
   affectedRows: number;
   fieldCount: number;
   info: string;
@@ -7,4 +7,4 @@ export type InsertQuery = {
   warningStatus: number;
 };
 
-export type SelectQuery<T> = [T];
+export type ResultSelectQuery<T> = [T];

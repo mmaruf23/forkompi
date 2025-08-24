@@ -1,16 +1,17 @@
 import { query } from "@/lib/db";
-import type { SelectQuery } from "@/types/db";
+import type { ResultSetHeader, ResultSelectQuery } from "@/types/db";
 import type { UpdateUserRequest } from "@/types/request";
 import type { ApiResponse, UserResponse } from "@/types/response";
+import bcrypt from "bcryptjs";
 
 export const getUserProfile = async (
-  userId: string | undefined
+  userId: number | undefined
 ): Promise<ApiResponse<UserResponse>> => {
   try {
     if (!userId) return { status: "error", code: 400, message: "Input tidak valid." };
 
     const users = await query<
-      SelectQuery<{ username: string; first_name: string; last_name: string }>
+      ResultSelectQuery<{ username: string; first_name: string; last_name: string }>
     >("SELECT username, first_name, last_name FROM users where id = ?", [userId]);
 
     if (!users.length) return { status: "error", code: 404, message: "User tidak ditemukan." };
@@ -35,9 +36,9 @@ export const getUserProfile = async (
 };
 
 export const updateUserProfile = async (
-  userId: string | undefined,
+  userId: number | undefined,
   ur: UpdateUserRequest
-): Promise<ApiResponse<UserResponse>> => {
+): Promise<ApiResponse<null>> => {
   try {
     if (!userId) return { status: "error", code: 404, message: "User belum login." };
     const { username, firstName, password, lastName } = ur;
@@ -45,11 +46,39 @@ export const updateUserProfile = async (
       return { status: "error", code: 400, message: "Data tidak valid!" };
 
     const users = await query<
-      SelectQuery<{ username: string; first_name: string; last_name: string }>
-    >("SELECT username, first_name, last_name FROM users where id = ?", [userId]);
+      ResultSelectQuery<{
+        username: string;
+        first_name: string;
+        last_name: string;
+        password_hash: string;
+      }>
+    >("SELECT username, first_name, last_name, password_hash FROM users where id = ?", [userId]);
 
     if (!users.length) return { status: "error", code: 404, message: "User tidak ditemukan." };
-    // nanti lanjut cek
+
+    const user = users[0];
+    if (username && user.username !== username) {
+      const isDuplicate = await query<ResultSelectQuery<{ username: string }>>(
+        "SELECT username FROM users where username = ?",
+        [username]
+      );
+      if (isDuplicate.length) {
+        return { status: "error", code: 409, message: "Usernama sudah digunakan!" };
+      }
+
+      user.username = username;
+    }
+
+    if (password) user.password_hash = await bcrypt.hash(password, 10);
+    if (firstName) user.first_name = firstName;
+    if (lastName) user.last_name = lastName;
+
+    const result = await query<ResultSetHeader>(
+      "UPDATE users SET username = ?, first_name = ?, last_name = ?, password_hash = ? WHERE id = ?",
+      [user.username, user.first_name, user.last_name, user.password_hash, userId]
+    );
+    if (!result.affectedRows)
+      return { status: "error", code: 500, message: "Error saat update data." };
 
     return {
       status: "success",
@@ -60,7 +89,7 @@ export const updateUserProfile = async (
     return {
       status: "error",
       code: 500,
-      message: "Terjadi kesalahan.",
+      message: "Internal Server Error",
     };
   }
 };
