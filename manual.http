@@ -1,0 +1,54 @@
+### TEST REGISTER
+POST http://localhost:3000/api/register
+Content-Type: application/json
+
+{
+  "username": "mmaruf",
+  "firstName": "Muhammad Ma'ruf",
+  "lastName": "",
+  "password": "rahasia"
+}
+
+### TEST REGISTER ERROR
+POST http://localhost:3000/api/register
+Content-Type: application/json
+
+{
+  "username": "",
+  "firstName": "",
+  "lastName": "",
+  "password": ""
+}
+
+### TEST LOGIN
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+  "username": "mmaruf",
+  "password": "rahasia"
+}
+
+### TEST GET PROFILE
+GET http://localhost:3000/api/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoibW1hcnVmIiwiaWF0IjoxNzU2MDUwNDk5LCJleHAiOjE3NTYwNTQwOTl9.UirfIQYLExGZB4OhoOgB9V8-ecDZQC3w8_mjIEjz6jQ
+
+### TEST UPDATE PROFILE
+POST http://localhost:3000/api/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoibW1hcnVmIiwiaWF0IjoxNzU2MDUwNDk5LCJleHAiOjE3NTYwNTQwOTl9.UirfIQYLExGZB4OhoOgB9V8-ecDZQC3w8_mjIEjz6jQ
+Content-Type: application/json
+
+{
+  "username": "mmaruf23",
+  "firstName": "Muhammad",
+  "lastName": "Ma'ruf"
+}
+
+### TEST UPDATE PASSWORD AJA
+POST http://localhost:3000/api/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoibW1hcnVmIiwiaWF0IjoxNzU2MDUwNDk5LCJleHAiOjE3NTYwNTQwOTl9.UirfIQYLExGZB4OhoOgB9V8-ecDZQC3w8_mjIEjz6jQ
+Content-Type: application/json
+
+{
+  "password": "masihrahasia"
+}
