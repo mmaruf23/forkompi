@@ -1,4 +1,4 @@
-import { registerUser } from "@/services/backend.service";
+import { registerUser } from "@/services/auth.service";
 import type { RegisterRequest } from "@/types/request";
 import type { ApiResponse } from "@/types/response";
 import type { NextApiHandler, NextApiResponse } from "next";

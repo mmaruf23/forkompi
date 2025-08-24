@@ -11,3 +11,9 @@ export type ApiErrorResponse = {
 };
 
 export type ApiResponse<T> = ApiSuccessResponse<T> | ApiErrorResponse;
+
+export type UserResponse = {
+  username: string;
+  firstName: string;
+  lastName?: string;
+};

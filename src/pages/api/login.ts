@@ -1,4 +1,4 @@
-import { loginUser } from "@/services/backend.service";
+import { loginUser } from "@/services/auth.service";
 import type { LoginRequest } from "@/types/request";
 import type { ApiResponse } from "@/types/response";
 import type { NextApiHandler, NextApiResponse } from "next";
