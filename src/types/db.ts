@@ -8,3 +8,26 @@ export type ResultSetHeader = {
 };
 
 export type ResultSelectQuery<T> = [T];
+
+export type User = {
+  id: number;
+  username: string;
+  first_name: string;
+  last_name: string;
+  password_hash: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type News = {
+  title: string;
+  subtitle: string;
+  slug: string;
+  thumbnail_url: string;
+  content: string;
+  author_id: number;
+  status: "draft" | "pending" | "published" | "archieved" | "deleted";
+  created_at: string;
+  updated_at: string;
+  published_at: string;
+};

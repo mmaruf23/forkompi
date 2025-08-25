@@ -1,9 +1,10 @@
 import { query } from "@/lib/db";
-import type { ResultSetHeader, ResultSelectQuery } from "@/types/db";
+import type { ResultSetHeader, ResultSelectQuery, User } from "@/types/db";
 import type { LoginRequest, RegisterRequest } from "@/types/request";
 import type { ApiResponse } from "@/types/response";
 import bcrypt from "bcryptjs";
-import { sign } from "jsonwebtoken";
+import { sign, verify, type VerifyErrors } from "jsonwebtoken";
+import type { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {
@@ -53,9 +54,9 @@ export const loginUser = async (lr: LoginRequest): Promise<ApiResponse<{ token: 
     if (!username || !password)
       return { status: "error", code: 400, message: "Input tidak lengkap!" };
 
-    const users = await query<
-      ResultSelectQuery<{ id: number; password_hash: string; username: string }>
-    >("SELECT id, username, password_hash FROM users WHERE username = ?", [username]);
+    const users = await query<ResultSelectQuery<User>>("SELECT * FROM users WHERE username = ?", [
+      username,
+    ]);
     if (!users.length)
       return { status: "error", code: 401, message: "Invalid username or password." };
 
@@ -72,4 +73,33 @@ export const loginUser = async (lr: LoginRequest): Promise<ApiResponse<{ token: 
     console.error(error);
     return { status: "error", code: 500, message: "Internal Server Error" };
   }
+};
+
+export const withAuth = (handler: NextApiHandler) => {
+  return async (req: NextApiRequest, res: NextApiResponse) => {
+    const authorization = req.headers["authorization"];
+    if (!authorization) {
+      return res.status(401).json({
+        status: "error",
+        code: 401,
+        message: "Missing Authorization Token.",
+      });
+    }
+
+    let decoded: JwtPayload;
+    try {
+      const token = authorization.split(" ")[1];
+      decoded = verify(token, JWT_SECRET) as JwtPayload;
+    } catch (error) {
+      const verifyErrors = error as VerifyErrors;
+      return res.status(401).json({
+        status: "error",
+        code: 401,
+        message: verifyErrors.message || "Authorization Error",
+      });
+    }
+    req.userId = decoded.userId;
+
+    return handler(req, res);
+  };
 };

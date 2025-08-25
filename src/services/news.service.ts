@@ -1,0 +1,1 @@
+export const postNews = async () => {};
