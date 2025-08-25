@@ -31,7 +31,8 @@ Content-Type: application/json
 
 ### TEST GET PROFILE
 GET http://localhost:3000/api/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoibW1hcnVmIiwiaWF0IjoxNzU2MDUwNDk5LCJleHAiOjE3NTYwNTQwOTl9.UirfIQYLExGZB4OhoOgB9V8-ecDZQC3w8_mjIEjz6jQ
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoibW1hcnVmIiwiaWF0IjoxNzU2MDUwNDk5LCJleHAiOjE3NTYwNTQwOTl9.usMzzTufgxU7tJA6xwyg3SbVn1WlH5bp5soZULlavrU
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoibW1hcnVmIiwiaWF0IjoxNzU2MDUwNDk5LCJleHAiOjE3NTYwNTQwOTl9.UirfIQYLExGZB4OhoOgB9V8-ecDZQC3w8_mjIEjz6jQ
 
 ### TEST UPDATE PROFILE
 POST http://localhost:3000/api/profile

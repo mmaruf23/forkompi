@@ -1,3 +1,5 @@
+import type { File } from "formidable";
+
 export type RegisterRequest = {
   username: string;
   firstName: string;
@@ -15,4 +17,11 @@ export type UpdateUserRequest = {
   firstName?: string;
   lastName?: string;
   password?: string;
+};
+
+export type NewsPostRequest = {
+  title?: string;
+  subtitle?: string;
+  content?: string;
+  images?: File;
 };
