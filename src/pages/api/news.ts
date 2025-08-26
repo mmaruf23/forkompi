@@ -2,7 +2,7 @@ import { withAuth } from "@/services/auth.service";
 import type { ApiResponse } from "@/types/response";
 import type { NextApiHandler, NextApiResponse } from "next";
 
-//contoh
+// libur dulu hari ini
 const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<null>>) => {
   if (req.method == "POST") {
     // Handle bikin draft news
