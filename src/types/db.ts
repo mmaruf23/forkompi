@@ -32,3 +32,14 @@ export type News = {
   updated_at: string;
   published_at: string;
 };
+
+export type JoinNews = {
+  title: string;
+  subtitle: string;
+  slug: string;
+  thumbnail_url: string;
+  content: string;
+  published_at: string;
+  first_name: string;
+  last_name: string;
+};

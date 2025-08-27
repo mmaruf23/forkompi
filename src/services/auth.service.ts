@@ -75,32 +75,30 @@ export const loginUser = async (lr: LoginRequest): Promise<ApiResponse<{ token: 
   }
 };
 
-export const withAuth = (handler: NextApiHandler, exceptMethod?: string[]) => {
+export const withAuth = (handler: NextApiHandler) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
-    if (!exceptMethod || !req.method || exceptMethod.includes(req.method)) {
-      const authorization = req.headers["authorization"];
-      if (!authorization) {
-        return res.status(401).json({
-          status: "error",
-          code: 401,
-          message: "Missing Authorization Token.",
-        });
-      }
-
-      let decoded: JwtPayload;
-      try {
-        const token = authorization.split(" ")[1];
-        decoded = verify(token, JWT_SECRET) as JwtPayload;
-      } catch (error) {
-        const verifyErrors = error as VerifyErrors;
-        return res.status(401).json({
-          status: "error",
-          code: 401,
-          message: verifyErrors.message || "Authorization Error",
-        });
-      }
-      req.userId = decoded.userId;
+    const authorization = req.headers["authorization"];
+    if (!authorization) {
+      return res.status(401).json({
+        status: "error",
+        code: 401,
+        message: "Missing Authorization Token.",
+      });
     }
+
+    let decoded: JwtPayload;
+    try {
+      const token = authorization.split(" ")[1];
+      decoded = verify(token, JWT_SECRET) as JwtPayload;
+    } catch (error) {
+      const verifyErrors = error as VerifyErrors;
+      return res.status(401).json({
+        status: "error",
+        code: 401,
+        message: verifyErrors.message || "Authorization Error",
+      });
+    }
+    req.userId = decoded.userId;
 
     return handler(req, res);
   };

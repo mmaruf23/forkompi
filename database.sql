@@ -35,3 +35,7 @@ INSERT INTO news (title, subtitle, slug, thumbnail_url, content, author_id, stat
 ('Resep Masakan Rumahan Mudah dan Cepat', 'Panduan membuat hidangan lezat dalam waktu singkat.', 'resep-masakan-rumahan-mudah-cepat', 'https://placehold.co/600x400/ffc107/000000?text=Masakan', 'Cocok untuk pemula yang ingin belajar memasak. Aku sih tidak butuh resep seperti ini.', 1, 'draft', NULL),
 ('Tips Produktivitas untuk Work From Home', 'Cara agar tetap fokus dan efisien saat bekerja dari rumah.', 'tips-produktivitas-work-from-home', 'https://placehold.co/600x400/17a2b8/ffffff?text=WFH', 'Meskipun membosankan, ada beberapa trik agar pekerjaan cepat selesai. Terserahmu mau ikut atau tidak.', 1, 'pending', NULL),
 ('Destinasi Wisata Paling Diminati Tahun Ini', 'Jelajahi keindahan alam dan budaya lokal.', 'destinasi-wisata-paling-diminati', 'https://placehold.co/600x400/dc3545/ffffff?text=Wisata', 'Dari pantai hingga pegunungan, pilihan tempat liburan yang menakjubkan. Tidak seperti aku yang tidak butuh liburan.', 1, 'published', NOW());
+
+SELECT n.title, n.subtitle, n.slug, n.thumbnail_url, n.content, u.first_name, u.last_name, n.published_at
+FROM news n LEFT JOIN users u
+ON n.author_id = u.id;

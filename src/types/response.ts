@@ -17,3 +17,14 @@ export type UserResponse = {
   firstName: string;
   lastName?: string;
 };
+
+// published only
+export type NewsResponse = {
+  title: string;
+  subtitle: string;
+  slug: string;
+  thumbnail_url: string;
+  content: string;
+  published_at: string;
+  author: { first_name: string; last_name: string };
+};

@@ -1,11 +1,12 @@
 import { withAuth } from "@/services/auth.service";
 import { parseNewsRequest } from "@/services/file.service";
-import { createNewsDraft, editNewsDraft } from "@/services/news.service";
+import { createNewsDraft, editNewsDraft, getAllNews, updateStatus } from "@/services/news.service";
+import type { News } from "@/types/db";
 import type { ApiResponse } from "@/types/response";
 import type { NextApiHandler, NextApiResponse } from "next";
 
 // libur dulu hari ini
-const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<string>>) => {
+const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<News[] | string>>) => {
   if (req.method == "POST") {
     const nr = await parseNewsRequest(req);
     if (!nr)
@@ -16,23 +17,37 @@ const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<str
 
   if (req.method == "PUT") {
     const nr = await parseNewsRequest(req);
-    const newsId = req.body.id as number;
-    if (!nr)
+    const newsId = req.body.id as number | undefined;
+    if (!nr || !newsId)
       return res.status(500).json({ status: "error", code: 500, message: "error while parsing" });
     const result = await editNewsDraft(nr, newsId);
     return res.status(result.code).json(result);
   }
 
   if (req.method == "PATCH") {
-    // handle ubah status news
-    return res.status(200).json({ status: "success", code: 200 });
+    const newsId = req.body.id as number | undefined;
+    const status = req.body.status as "draft" | "pending" | "published" | "archieved" | undefined;
+    if (!status || !newsId)
+      return res.status(400).json({ status: "error", code: 400, message: "Bad Request" });
+    const result = await updateStatus(newsId, status);
+    return res.status(result.code).json(result);
   }
+
+  if (req.method == "DELETE") {
+    const newsId = req.body.id as number | undefined;
+    const status = req.body.status as "deleted" | undefined;
+    if (status !== "deleted" || !newsId)
+      return res.status(400).json({ status: "error", code: 400, message: "Bad Request" });
+    const result = await updateStatus(newsId, status);
+    return res.status(result.code).json(result);
+  }
+
   if (req.method == "GET") {
-    // handle get news
-    // note. jika admin kasih semua termasuk yang draft
-    return res.status(200).json({ status: "success", code: 200 });
+    const result = await getAllNews();
+    return res.status(result.code).json(result);
   }
+
   return res.status(405).json({ status: "error", code: 405, message: "METHOD NOT ALLOWED" });
 };
 
-export default withAuth(handler, ["GET"]);
+export default withAuth(handler);
