@@ -3,7 +3,7 @@ import { formidable, type File } from "formidable";
 import type { NextApiRequest } from "next";
 import path from "path";
 import fs from "fs";
-import type { NewsPostRequest } from "@/types/request";
+import type { NewsRequest } from "@/types/request";
 
 const imagesDir = path.join(process.cwd(), "public", "file", "images");
 if (!fs.existsSync(imagesDir)) {
@@ -38,7 +38,7 @@ export const saveImages = async (
     fs.renameSync(imageFile.filepath, newPath);
 
     // URL yang akan disimpan di database dan diakses dari frontend
-    const imageUrl = `/uploads/images/${fileName}`;
+    const imageUrl = `/file/images/${fileName}`;
     return imageUrl;
   } catch (error) {
     console.error("File upload error:", error);
@@ -50,9 +50,14 @@ export const saveImages = async (
   }
 };
 
-export const parseNewsPostRequest = async (
-  req: NextApiRequest
-): Promise<NewsPostRequest | undefined> => {
+// export const deleteImage = async (urlFile: string) => {
+//   const pathFile = urlFile.replace("/file/images/", "/");
+//   fs.unlink(pathFile, (err) => {
+//     console.error(err);
+//   });
+// };
+
+export const parseNewsRequest = async (req: NextApiRequest): Promise<NewsRequest | undefined> => {
   return new Promise((resolve) => {
     const form = formidable({ multiples: true });
     form.parse(req, (err, fields, files) => {

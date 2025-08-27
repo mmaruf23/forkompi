@@ -19,7 +19,7 @@ export type UpdateUserRequest = {
   password?: string;
 };
 
-export type NewsPostRequest = {
+export type NewsRequest = {
   title?: string;
   subtitle?: string;
   content?: string;
