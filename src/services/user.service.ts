@@ -8,7 +8,7 @@ export const getUserProfile = async (
   userId: number | undefined
 ): Promise<ApiResponse<UserResponse>> => {
   try {
-    if (!userId) return { status: "error", code: 400, message: "Input tidak valid." };
+    if (!userId) return { status: "error", code: 400, message: "User tidak valid." };
 
     const users = await query<ResultSelectQuery<User>>("SELECT * FROM users where id = ?", [
       userId,

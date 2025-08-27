@@ -50,11 +50,14 @@ export const saveImages = async (
   }
 };
 
-export const parseNewsPostRequest = async (req: NextApiRequest): Promise<NewsPostRequest> => {
-  return new Promise((resolve, reject) => {
+export const parseNewsPostRequest = async (
+  req: NextApiRequest
+): Promise<NewsPostRequest | undefined> => {
+  return new Promise((resolve) => {
     const form = formidable({ multiples: true });
     form.parse(req, (err, fields, files) => {
-      if (err) return reject(err);
+      console.error(err);
+      if (err) return resolve(undefined);
       resolve({
         title: fields.title?.[0],
         content: fields.content?.[0],

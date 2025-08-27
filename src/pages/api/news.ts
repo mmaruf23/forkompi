@@ -1,12 +1,18 @@
 import { withAuth } from "@/services/auth.service";
+import { parseNewsPostRequest } from "@/services/file.service";
+import { createNewsDraft } from "@/services/news.service";
 import type { ApiResponse } from "@/types/response";
 import type { NextApiHandler, NextApiResponse } from "next";
 
 // libur dulu hari ini
-const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<null>>) => {
+const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<string>>) => {
   if (req.method == "POST") {
-    // Handle bikin draft news
-    return res.status(201).json({ status: "success", code: 200 });
+    const npr = await parseNewsPostRequest(req);
+    if (!npr)
+      return res.status(500).json({ status: "error", code: 500, message: "error while parsing" });
+
+    const result = await createNewsDraft(npr, req.userId);
+    return res.status(result.code).json(result);
   }
 
   if (req.method == "PUT") {

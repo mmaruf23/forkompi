@@ -20,6 +20,7 @@ export type User = {
 };
 
 export type News = {
+  id: number;
   title: string;
   subtitle: string;
   slug: string;
