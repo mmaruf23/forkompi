@@ -20,8 +20,9 @@ export type UpdateUserRequest = {
 };
 
 export type NewsRequest = {
+  id?: string;
   title?: string;
   subtitle?: string;
   content?: string;
-  images?: File;
+  image?: File;
 };

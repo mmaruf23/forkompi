@@ -10,6 +10,8 @@ if (!fs.existsSync(imagesDir)) {
   fs.mkdirSync(imagesDir, { recursive: true });
 }
 
+const form = formidable({ multiples: true });
+
 /**
  * Menyimpan gambar ke direktory public.
  * @param imageFile Files<string> dari formidable.
@@ -30,14 +32,11 @@ export const saveImages = async (
     return { status: "error", code: 400, message: "Hanya file gambar yang boleh diupload." };
   }
   try {
-    // Buat nama file unik untuk menghindari konflik
-    const fileName = `${Date.now()}-${path.extname(imageFile.originalFilename!)}`;
+    const fileName = `${Date.now()}${path.extname(imageFile.originalFilename!)}`;
     const newPath = path.join(imagesDir, fileName);
 
-    // Pindahkan file dari lokasi sementara ke lokasi permanen
-    fs.renameSync(imageFile.filepath, newPath);
+    await moveFile(imageFile.filepath, newPath);
 
-    // URL yang akan disimpan di database dan diakses dari frontend
     const imageUrl = `/file/images/${fileName}`;
     return imageUrl;
   } catch (error) {
@@ -50,25 +49,51 @@ export const saveImages = async (
   }
 };
 
-// export const deleteImage = async (urlFile: string) => {
-//   const pathFile = urlFile.replace("/file/images/", "/");
-//   fs.unlink(pathFile, (err) => {
-//     console.error(err);
-//   });
-// };
-
 export const parseNewsRequest = async (req: NextApiRequest): Promise<NewsRequest | undefined> => {
-  return new Promise((resolve) => {
-    const form = formidable({ multiples: true });
-    form.parse(req, (err, fields, files) => {
-      console.error(err);
-      if (err) return resolve(undefined);
-      resolve({
-        title: fields.title?.[0],
-        content: fields.content?.[0],
-        subtitle: fields.subtitle?.[0],
-        images: files.image?.[0],
-      });
+  try {
+    const [fields, files] = await form.parse(req);
+    return {
+      id: fields.id?.[0],
+      title: fields.title?.[0],
+      subtitle: fields.subtitle?.[0],
+      content: fields.content?.[0],
+      image: files.image?.[0],
+    };
+  } catch (error) {
+    console.error("error while parsing request : ", error);
+    return undefined;
+  }
+};
+
+function moveFile(sourcePath: string, destinationPath: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    fs.rename(sourcePath, destinationPath, (err) => {
+      if (err) {
+        if (err.code === "EXDEV") {
+          // Jika gagal karena beda device, lakukan copy dan delete
+          const readStream = fs.createReadStream(sourcePath);
+          const writeStream = fs.createWriteStream(destinationPath);
+
+          readStream.pipe(writeStream);
+
+          writeStream.on("finish", () => {
+            fs.unlink(sourcePath, (unlinkErr) => {
+              if (unlinkErr) {
+                return reject(unlinkErr);
+              }
+              resolve();
+            });
+          });
+
+          writeStream.on("error", (writeErr) => {
+            reject(writeErr);
+          });
+        } else {
+          reject(err);
+        }
+      } else {
+        resolve();
+      }
     });
   });
-};
+}

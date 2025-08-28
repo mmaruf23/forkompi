@@ -3,7 +3,10 @@ import type { LoginRequest } from "@/types/request";
 import type { ApiResponse } from "@/types/response";
 import type { NextApiHandler, NextApiResponse } from "next";
 
-const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<string>>) => {
+const handler: NextApiHandler = async (
+  req,
+  res: NextApiResponse<ApiResponse<{ token: string }>>
+) => {
   if (req.method !== "POST") {
     return res.status(405).json({
       status: "error",
@@ -14,7 +17,6 @@ const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<str
 
   const payload = req.body as LoginRequest;
   const result = await loginUser(payload);
-  console.log(result);
   res.status(result.code).json(result);
 };
 

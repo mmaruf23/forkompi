@@ -65,7 +65,7 @@ export const loginUser = async (lr: LoginRequest): Promise<ApiResponse<{ token: 
       return { status: "error", code: 401, message: "Invalid username or password." };
 
     const token = sign({ userId: users[0].id, username: users[0].username }, JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "1h", // todo : ganti jadi 24 jam aja nanti
     });
 
     return { status: "success", code: 200, data: { token } };
