@@ -1,5 +1,5 @@
 import { query } from "@/lib/db";
-import type { ResultSetHeader, ResultSelectQuery } from "@/types/db";
+import type { ResultSetHeader, ResultSelectQuery, User } from "@/types/db";
 import type { UpdateUserRequest } from "@/types/request";
 import type { ApiResponse, UserResponse } from "@/types/response";
 import bcrypt from "bcryptjs";
@@ -8,11 +8,11 @@ export const getUserProfile = async (
   userId: number | undefined
 ): Promise<ApiResponse<UserResponse>> => {
   try {
-    if (!userId) return { status: "error", code: 400, message: "Input tidak valid." };
+    if (!userId) return { status: "error", code: 400, message: "User tidak valid." };
 
-    const users = await query<
-      ResultSelectQuery<{ username: string; first_name: string; last_name: string }>
-    >("SELECT username, first_name, last_name FROM users where id = ?", [userId]);
+    const users = await query<ResultSelectQuery<User>>("SELECT * FROM users where id = ?", [
+      userId,
+    ]);
 
     if (!users.length) return { status: "error", code: 404, message: "User tidak ditemukan." };
 
@@ -45,14 +45,9 @@ export const updateUserProfile = async (
     if (!username && !firstName && !password && !lastName)
       return { status: "error", code: 400, message: "Data tidak valid!" };
 
-    const users = await query<
-      ResultSelectQuery<{
-        username: string;
-        first_name: string;
-        last_name: string;
-        password_hash: string;
-      }>
-    >("SELECT username, first_name, last_name, password_hash FROM users where id = ?", [userId]);
+    const users = await query<ResultSelectQuery<User>>("SELECT * FROM users where id = ?", [
+      userId,
+    ]);
 
     if (!users.length) return { status: "error", code: 404, message: "User tidak ditemukan." };
 

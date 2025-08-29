@@ -1,4 +1,4 @@
-### TEST REGISTER
+### TEST REGISTER ✅
 POST http://localhost:3000/api/register
 Content-Type: application/json
 
@@ -9,7 +9,7 @@ Content-Type: application/json
   "password": "rahasia"
 }
 
-### TEST REGISTER ERROR
+### TEST REGISTER ERROR ✅
 POST http://localhost:3000/api/register
 Content-Type: application/json
 
@@ -20,35 +20,105 @@ Content-Type: application/json
   "password": ""
 }
 
-### TEST LOGIN
+### TEST LOGIN ✅
 POST http://localhost:3000/api/login
 Content-Type: application/json
 
 {
   "username": "mmaruf",
-  "password": "rahasia"
+  "password": "masihrahasia"
 }
 
-### TEST GET PROFILE
+### TEST GET PROFILE ✅
 GET http://localhost:3000/api/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoibW1hcnVmIiwiaWF0IjoxNzU2MDUwNDk5LCJleHAiOjE3NTYwNTQwOTl9.UirfIQYLExGZB4OhoOgB9V8-ecDZQC3w8_mjIEjz6jQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1NjM1NTk3MCwiZXhwIjoxNzU2MzU5NTcwfQ.0KPlH23gCWbwU7K5OaZoLj6HIzzBxSTAEgg2bvgNGGQ
 
-### TEST UPDATE PROFILE
+### TEST UPDATE PROFILE ✅
 POST http://localhost:3000/api/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoibW1hcnVmIiwiaWF0IjoxNzU2MDUwNDk5LCJleHAiOjE3NTYwNTQwOTl9.UirfIQYLExGZB4OhoOgB9V8-ecDZQC3w8_mjIEjz6jQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1NjM1NTk3MCwiZXhwIjoxNzU2MzU5NTcwfQ.0KPlH23gCWbwU7K5OaZoLj6HIzzBxSTAEgg2bvgNGGQ
 Content-Type: application/json
 
 {
-  "username": "mmaruf23",
   "firstName": "Muhammad",
   "lastName": "Ma'ruf"
 }
 
-### TEST UPDATE PASSWORD AJA
+### TEST UPDATE PASSWORD AJA ✅
 POST http://localhost:3000/api/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoibW1hcnVmIiwiaWF0IjoxNzU2MDUwNDk5LCJleHAiOjE3NTYwNTQwOTl9.UirfIQYLExGZB4OhoOgB9V8-ecDZQC3w8_mjIEjz6jQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1NjM1NTk3MCwiZXhwIjoxNzU2MzU5NTcwfQ.0KPlH23gCWbwU7K5OaZoLj6HIzzBxSTAEgg2bvgNGGQ
 Content-Type: application/json
 
 {
   "password": "masihrahasia"
 }
+
+### TEST CREATE DRAFT NEWS ✅
+POST http://localhost:3000/api/news
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1NjM1OTk0OSwiZXhwIjoxNzU2MzYzNTQ5fQ.RC775BRYcYG15lmVJJl4zUbLQYq-K4y7mXL4vUi7F7Q
+Content-Type: multipart/form-data; boundary=boundary_string
+
+--boundary_string
+Content-Disposition: form-data; name="title"
+
+Judul berita pertama.
+--boundary_string
+Content-Disposition: form-data; name="subtitle"
+
+Sub-judul berita pertama.
+--boundary_string
+Content-Disposition: form-data; name="content"
+
+Content berita pertama.
+--boundary_string
+Content-Disposition: form-data; name="image"; filename="contoh.png"
+Content-Type: image/png
+
+< C:/Users/mmaruf23/Pictures/logo.png
+--boundary_string--
+
+### TEST GET NEWS SEBAGAI PUBLIC ✅
+GET http://localhost:3000/api/news/published 
+
+### TEST GET NEWS SEBAGAI ADMIN ✅
+GET http://localhost:3000/api/news 
+Auth
+orization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1NjMxNDA1NiwiZXhwIjoxNzU2MzE3NjU2fQ.RI2W-79Mn0TuifwPTlTDJeKwFDyo0gw1QwMi4gjDOZY
+
+### TEST GET NEWS BY ID ✅
+GET http://localhost:3000/api/news/11
+
+### TEST EDIT NEWS ✅
+PUT http://localhost:3000/api/news
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1NjM2NzU2OCwiZXhwIjoxNzU2MzcxMTY4fQ.MZAQ2JOe-wZGtD9i0C3ETY8iZiOuyw4F2yaMyin3gMc
+Content-Type: multipart/form-data; boundary=boundary_string
+
+--boundary_string
+Content-Disposition: form-data; name="id"
+
+11
+--boundary_string
+# Content-Disposition: form-data; name="title"
+# 
+# Judul Berita Pertama Edited Kedua
+# --boundary_string
+# Content-Disposition: form-data; name="content"
+# 
+# Isi berita yang panjang edited
+# --boundary_string
+Content-Disposition: form-data; name="image"; filename="logo.png"
+Content-Type: image/png
+
+< C:/Users/mmaruf23/Pictures/logo.png
+--boundary_string--
+
+### TEST PUBLISH NEWS ✅
+PATCH http://localhost:3000/api/news/11
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1NjM2NzU2OCwiZXhwIjoxNzU2MzcxMTY4fQ.MZAQ2JOe-wZGtD9i0C3ETY8iZiOuyw4F2yaMyin3gMc
+
+
+### TEST DELETE NEWS ✅
+DELETE http://localhost:3000/api/news/11
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1NjM2NzU2OCwiZXhwIjoxNzU2MzcxMTY4fQ.MZAQ2JOe-wZGtD9i0C3ETY8iZiOuyw4F2yaMyin3gMc
+
+### TEST GET IMAGE ✅
+GET http://localhost:3000/file/images/1756362318883-updated.png
