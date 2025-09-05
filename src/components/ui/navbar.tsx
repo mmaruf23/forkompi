@@ -20,17 +20,17 @@ const Navbar = () => {
   const router = useRouter();
   const pathname = router.pathname.replace("/[slug]", "");
   return (
-    <nav className="w-full bg-transparent font-bold px-6 py-4 fixed top-0 z-10">
+    <nav className="w-full bg-transparent font-bold px-16 py-8 absolute top-0 z-10">
       <div className="mx-auto flex justify-between items-center text-xl">
         <Link href="/" className="font-bold">
-          <Image src={"/forkompi-logo.png"} alt="forkompi-logo" width={60} height={60} priority />
+          <Image src={"/forkompi-logo.png"} alt="forkompi-logo" width={100} height={100} priority />
         </Link>
         <ul className="flex space-x-8">
           {navItems.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
-                className={`hover:underline underline-offset-2 ${
+                className={`hover:underline underline-offset-2 text-2xl ${
                   pathname == item.href ? "text-outline" : "text-red-600"
                 }`}
               >
