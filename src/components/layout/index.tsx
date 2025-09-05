@@ -16,6 +16,7 @@ const Layout = ({ children }: LayoutProps) => {
     <div className={`min-h-svh ` + hammersmith.className}>
       <Navbar />
       <main className="grow flex items-center">{children}</main>
+      <Footer />
     </div>
   );
 };
