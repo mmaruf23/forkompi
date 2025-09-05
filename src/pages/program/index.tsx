@@ -7,7 +7,7 @@ const ProgranPage = () => {
       <Hero
         title="program"
         descp="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, tenetur."
-        image="/hero-background-2.png"
+        bgImage="/hero-background-2.png"
       />
     </div>
   );
