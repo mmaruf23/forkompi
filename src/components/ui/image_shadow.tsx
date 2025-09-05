@@ -35,7 +35,7 @@ const ImageShadowed = ({ src, value, color }: ImageShadowedProps) => {
         alt="IMAGE"
         height={250}
         width={300}
-        className={`${translate} rounded-tl-[20%] rounded-br-[20%] w-[300px] h-[250px] object-cover`}
+        className={`${translate} rounded-tl-[20%] rounded-br-[20%] w-[400px] h-[350px] object-cover`}
       />
     </div>
   );

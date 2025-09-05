@@ -3,19 +3,26 @@ import React from "react";
 type HeroProps = {
   title: string;
   descp: string;
-  image: string;
 };
 
-const Hero = ({ title, descp, image }: HeroProps) => {
+const Hero = ({ title, descp }: HeroProps) => {
   return (
-    <div
-      className={`relative flex justify-center items-center w-full h-svh bg-no-repeat bg-cover bg-[url(${image})]`}
-      style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 75%, 0 95%)" }}
-    >
-      <div className="absolute inset-0 bg-white/50"></div>
-      <div className="z-20 text-red-700">
-        <h1 className="uppercase text-center text-7xl font-bold mb-5">{title}</h1>
-        <h1 className="font-semibold">{descp}</h1>
+    <div className="bg-white">
+      <div
+        className="relative flex justify-center items-center w-full min-h-[70vh] sm:min-h-[80vh] md:min-h-screen bg-no-repeat bg-cover bg-center"
+        style={{
+          clipPath: "polygon(0% 0%, 100% 0%, 100% 75%, 0 95%)",
+          backgroundImage: "url('/hero-background-1.png')",
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-white/60"></div>
+
+        {/* Content */}
+        <div className="z-20 text-red-700 px-4 sm:px-6 md:px-12 text-center">
+          <h1 className="uppercase font-bold mb-4 text-3xl sm:text-4xl md:text-6xl">{title}</h1>
+          <h2 className="font-semibold text-base sm:text-lg md:text-xl">{descp}</h2>
+        </div>
       </div>
     </div>
   );
