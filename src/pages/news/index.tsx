@@ -3,7 +3,7 @@ import NewsCard from "@/components/ui/news_card";
 import { Share2 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { dummy_newses } from "./dummy";
+import { dummy_newses } from "../../lib/dummy";
 
 const NewsPage = () => {
   return (
