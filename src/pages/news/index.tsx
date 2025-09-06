@@ -1,16 +1,17 @@
 import Hero from "@/components/ui/hero";
 import NewsCard from "@/components/ui/news_card";
-import { Share2 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { dummy_newses } from "../../lib/dummy";
+import { HiShare } from "react-icons/hi";
 
 const NewsPage = () => {
   return (
-    <div className="h-[300svh] w-full">
+    <div className="min-h-svh w-full">
       <Hero
         title="news"
         descp="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, tenetur."
+        imageSrc="/news_image_background.jpg"
       />
       <div className="px-14">
         <div className="my-20">
@@ -36,7 +37,7 @@ const NewsPage = () => {
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, aperiam?
               </p>
               <div className="flex-grow flex justify-between items-end">
-                <Share2 className="text-white" />
+                <HiShare className="text-white text-2xl" />
                 <p>Senin, 24 April 2025</p>
               </div>
             </div>
@@ -65,6 +66,9 @@ const NewsPage = () => {
           {dummy_newses.map((n, i) => (
             <NewsCard {...n} key={i} />
           ))}
+        </div>
+        <div className="my-20 flex justify-center items-center">
+          <p className="text-red-600 text-2xl underline">Berita Lainnya</p>
         </div>
       </div>
     </div>

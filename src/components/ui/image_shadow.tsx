@@ -1,4 +1,4 @@
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
 import React from "react";
 
 /**
@@ -8,9 +8,7 @@ import React from "react";
  * @returns
  */
 type ImageShadowedProps = {
-  src: StaticImageData;
-  width: number;
-  height: number;
+  src: string;
   value: number;
   color: "red" | "blue" | "green" | "yellow";
 };
@@ -30,13 +28,14 @@ const ImageShadowed = ({ src, value, color }: ImageShadowedProps) => {
       : "bg-black";
   return (
     <div className={`${shadowShave} ${bgColor}`}>
-      <Image
-        src={src}
-        alt="IMAGE"
-        height={250}
-        width={300}
-        className={`${translate} rounded-tl-[20%] rounded-br-[20%] w-[400px] h-[350px] object-cover`}
-      />
+      <div className="w-[400px] h-[350px] relative">
+        <Image
+          src={src}
+          alt="IMAGE"
+          className={`${translate} rounded-tl-[20%] rounded-br-[20%] object-cover`}
+          fill
+        />
+      </div>
     </div>
   );
 };

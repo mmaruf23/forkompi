@@ -1,6 +1,6 @@
-import { Share2 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import { HiShare } from "react-icons/hi";
 
 type NewsCardProps = {
   title: string;
@@ -19,7 +19,7 @@ const NewsCard = ({ title, subtitle, content, image, published_at }: NewsCardPro
         <p className="line-clamp-6">{subtitle}</p>
         <p className="line-clamp-2">{content}</p>
         <div className="flex-grow flex justify-between items-end pt-6">
-          <Share2 className="text-white" />
+          <HiShare className="text-white text-2xl" />
           <p>{published_at}</p>
         </div>
       </div>
