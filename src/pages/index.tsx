@@ -1,22 +1,21 @@
 import Hero from "@/components/ui/hero";
 import ImageShadowed from "@/components/ui/image_shadow";
 import React from "react";
-import imagePath from "@/static/hero-background-1.png";
 import { FaInstagram, FaTiktok, FaTelegramPlane, FaYoutube, FaFacebook } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 import Link from "next/link";
 import Image from "next/image";
-import Footer from "@/components/ui/footer";
 
 const HomePage = () => {
   return (
-    <div className="h-[200svh] w-full">
+    <div className="min-h-svh w-full">
       {/* Hero */}
       <div className="relative">
         <Hero
           title="forkompi"
           descp="Forum Komunikasi Mahasiswa Poltekkes Kemenkes Se Indonesia."
+          imageSrc="/home_image_background.jpg"
         />
 
         {/* Button at the bottom center of Hero */}
@@ -75,7 +74,7 @@ const HomePage = () => {
 
         {/* Right Image */}
         <div className="md:w-1/2 flex justify-center pt-10">
-          <ImageShadowed src={imagePath} value={-16} width={300} color={"red"} height={250} />
+          <ImageShadowed src="/news_image_background.jpg" value={-16} color={"red"} />
         </div>
       </div>
 
@@ -83,7 +82,7 @@ const HomePage = () => {
       <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full h-auto bg-white px-10 py-16">
         {/* Left Image */}
         <div className="md:w-1/2 flex justify-center">
-          <ImageShadowed src={imagePath} value={-16} width={300} color={"yellow"} height={250} />
+          <ImageShadowed src="/kongres.jpg" value={-16} color={"yellow"} />
         </div>
 
         {/* Right Text */}
@@ -122,12 +121,12 @@ const HomePage = () => {
 
         {/* Right Image */}
         <div className="md:w-1/2 flex justify-center">
-          <ImageShadowed src={imagePath} value={-16} width={300} color={"green"} height={250} />
+          <ImageShadowed src="/image3.jpg" value={-16} color={"green"} />
         </div>
       </div>
 
       {/** Kegiatan Forkompi */}
-      <div className="flex flex-col w-full h-auto bg-white px-10 py-16 justify-center">
+      <div className="flex flex-col w-full h-full bg-white px-10 py-16 justify-center">
         <div className="flex flex-col items-center">
           <div className="w-64 h-2 bg-red-600 mb-4"></div>
           <h2 className="text-5xl font-bold mb-12 text-black text-center">Kegiatan Forkompi</h2>
@@ -136,31 +135,31 @@ const HomePage = () => {
         {/* Top row */}
         <div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="col-span-1">
+            <div className="col-span-1 h-[450px]">
               <Image
-                src="/hero-background-1.png"
+                src="/home_image_background.jpg"
                 alt="Gallery 1"
                 width={600}
                 height={400}
-                className="w-full h-auto object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
-            <div className="col-span-1">
+            <div className="col-span-1 h-[450px]">
               <Image
-                src="/hero-background-1.png"
+                src="/news_image_background.jpg"
                 alt="Gallery 2"
                 width={600}
                 height={400}
-                className="w-full h-auto object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
-            <div className="col-span-1">
+            <div className="col-span-1 h-[450px]">
               <Image
-                src="/hero-background-1.png"
+                src="/kongres.jpg"
                 alt="Gallery 3"
                 width={600}
                 height={400}
-                className="w-full h-auto object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
@@ -169,22 +168,22 @@ const HomePage = () => {
         {/* Bottom row */}
         <div className="pt-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="col-span-1">
+            <div className="col-span-1  h-[500px]">
               <Image
-                src="/hero-background-1.png"
+                src="/image3.jpg"
                 alt="Gallery 1"
                 width={1280}
                 height={720}
-                className="w-full h-auto object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
-            <div className="col-span-1">
+            <div className="col-span-1 h-[500px]">
               <Image
-                src="/hero-background-1.png"
+                src="/news_image_background2.jpg"
                 alt="Gallery 2"
                 width={1280}
                 height={720}
-                className="w-full h-auto object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>

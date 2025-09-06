@@ -3,16 +3,17 @@ import React from "react";
 type HeroProps = {
   title: string;
   descp: string;
+  imageSrc: string;
 };
 
-const Hero = ({ title, descp }: HeroProps) => {
+const Hero = ({ title, descp, imageSrc }: HeroProps) => {
   return (
     <div className="bg-white">
       <div
-        className="relative flex justify-center items-center w-full min-h-[70vh] sm:min-h-[80vh] md:min-h-screen bg-no-repeat bg-cover bg-center"
+        className="relative flex justify-center items-center w-full min-h-[70vh] sm:min-h-[80vh] md:min-h-screen bg-no-repeat bg-cover bg-bottom"
         style={{
           clipPath: "polygon(0% 0%, 100% 0%, 100% 75%, 0 95%)",
-          backgroundImage: "url('/hero-background-1.png')",
+          backgroundImage: `url('${imageSrc}')`,
         }}
       >
         {/* Overlay */}
