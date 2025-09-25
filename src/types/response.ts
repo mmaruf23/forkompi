@@ -9,14 +9,14 @@ export type Page = {
 
 export type ApiSuccessResponse<T> = {
   code: number;
-  status: "success";
+  success: true;
   data?: T;
   page?: Page;
 };
 
 export type ApiErrorResponse = {
   code: number;
-  status: "error";
+  success: false;
   message: string;
 };
 

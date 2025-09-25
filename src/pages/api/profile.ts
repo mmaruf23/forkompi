@@ -1,4 +1,4 @@
-import { withAuth } from "@/services/auth.service";
+import { doAuth } from "@/services/auth.service";
 import { getUserProfile, updateUserProfile } from "@/services/user.service";
 import type { UpdateUserRequest } from "@/types/request";
 import type { ApiResponse, UserResponse } from "@/types/response";
@@ -13,6 +13,9 @@ const handler: NextApiHandler = async (
   req,
   res: NextApiResponse<ApiResponse<UserResponse | null>>
 ) => {
+  const authError = doAuth(req);
+  if (authError) return res.status(authError.code).json(authError);
+
   if (req.method === "GET") {
     const result = await getUserProfile(req.userId);
     return res.status(result.code).json(result);
@@ -25,10 +28,10 @@ const handler: NextApiHandler = async (
   }
 
   return res.status(405).json({
-    status: "error",
+    success: false,
     code: 405,
     message: "METHOD NOT ALLOWED",
   });
 };
 
-export default withAuth(handler);
+export default handler;

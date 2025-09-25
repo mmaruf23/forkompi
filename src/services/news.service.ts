@@ -12,11 +12,11 @@ export const createNewsDraft = async (
 ): Promise<ApiResponse<string>> => {
   const { title, subtitle, content, image } = nr;
   if (!title || !subtitle || !content || !image)
-    return { status: "error", code: 400, message: "Invalid Request." };
+    return { success: false, code: 400, message: "Invalid Request." };
 
   try {
     const userResult = await getUserProfile(userId);
-    if (userResult.status == "error") return userResult;
+    if (userResult.success == false) return userResult;
 
     const slug = slugify(title).toLowerCase(); // bikin slug nya dari title aja kan?
     const existingNews = await query<ResultSelectQuery<News>>(
@@ -24,7 +24,7 @@ export const createNewsDraft = async (
       [title, slug]
     );
 
-    if (existingNews.length) return { status: "error", code: 409, message: "Judul sudah ada." };
+    if (existingNews.length) return { success: false, code: 409, message: "Judul sudah ada." };
 
     const thumbnailUrl = await saveImages(image);
     if (typeof thumbnailUrl != "string") return thumbnailUrl;
@@ -35,20 +35,20 @@ export const createNewsDraft = async (
     );
 
     if (!news.insertId) {
-      return { status: "error", code: 500, message: "error insert ke database" };
+      return { success: false, code: 500, message: "error insert ke database" };
     }
   } catch (error) {
     console.error(error);
-    return { status: "error", code: 500, message: "server error while create draft news" };
+    return { success: false, code: 500, message: "server error while create draft news" };
   }
 
-  return { status: "success", code: 201, data: "berhasil membuat draft" };
+  return { success: true, code: 201, data: "berhasil membuat draft" };
 };
 
 export const editNewsDraft = async (nr: NewsRequest): Promise<ApiResponse<string>> => {
   const { title, subtitle, content, image: images, id } = nr;
   if (!id || (!title && !subtitle && !content && !images))
-    return { status: "error", code: 400, message: "Tidak ada data yang diubah." };
+    return { success: false, code: 400, message: "Tidak ada data yang diubah." };
 
   try {
     const resultNews = await query<ResultSelectQuery<News>>("SELECT * FROM news WHERE id = ?", [
@@ -56,7 +56,7 @@ export const editNewsDraft = async (nr: NewsRequest): Promise<ApiResponse<string
     ]);
 
     if (!resultNews.length || resultNews[0].status !== "draft")
-      return { status: "error", code: 404, message: "draft tidak ada atau sudah publish" };
+      return { success: false, code: 404, message: "draft tidak ada atau sudah publish" };
 
     const news = resultNews[0];
     if (title) {
@@ -78,72 +78,72 @@ export const editNewsDraft = async (nr: NewsRequest): Promise<ApiResponse<string
     );
 
     if (!result.affectedRows)
-      return { status: "error", code: 500, message: "fail update news draft" };
+      return { success: false, code: 500, message: "fail update news draft" };
   } catch (error) {
     console.error(error);
-    return { status: "error", code: 500, message: "error while update news draft" };
+    return { success: false, code: 500, message: "error while update news draft" };
   }
 
-  return { status: "success", code: 200, data: "update draft berhasil" };
+  return { success: true, code: 200, data: "update draft berhasil" };
 };
 
 export const publishNewsDraft = async (newsId: string): Promise<ApiResponse<string>> => {
   try {
     const news = await query<ResultSelectQuery<News>>("SELECT * FROM news WHERE id = ?", [newsId]);
     if (!news.length || news[0].published_at != null)
-      return { status: "error", code: 404, message: "draft tidak ada atau sudah publish." };
+      return { success: false, code: 404, message: "draft tidak ada atau sudah publish." };
     const result = await query<ResultSetHeader>(
       "UPDATE news SET status = 'published', published_at = NOW() WHERE id = ?",
       [newsId]
     );
 
-    if (!result.affectedRows) return { status: "error", code: 500, message: "gagal update status" };
+    if (!result.affectedRows) return { success: false, code: 500, message: "gagal update status" };
   } catch (error) {
     console.error(error);
-    return { status: "error", code: 500, message: "error while update news status" };
+    return { success: false, code: 500, message: "error while update news status" };
   }
 
-  return { status: "success", code: 200, data: "update status draft berhasil" };
+  return { success: true, code: 200, data: "update status draft berhasil" };
 };
 
 export const deleteNews = async (newsId: string): Promise<ApiResponse<string>> => {
   try {
     const news = await query<ResultSelectQuery<News>>("SELECT * FROM news WHERE id = ?", [newsId]);
     if (!news.length || news[0].status == "deleted")
-      return { status: "error", code: 404, message: "data tidak ada atau sudah terhapus." };
+      return { success: false, code: 404, message: "data tidak ada atau sudah terhapus." };
 
     const result = await query<ResultSetHeader>("UPDATE news SET status = 'deleted' WHERE id = ?", [
       newsId,
     ]);
 
-    if (!result.affectedRows) return { status: "error", code: 500, message: "gagal update status" };
+    if (!result.affectedRows) return { success: false, code: 500, message: "gagal update status" };
   } catch (error) {
     console.error(error);
-    return { status: "error", code: 500, message: "error while update news status" };
+    return { success: false, code: 500, message: "error while update news status" };
   }
 
-  return { status: "success", code: 200, data: "data berhasil dihapus." };
+  return { success: true, code: 200, data: "data berhasil dihapus." };
 };
 
 export const getPublishedNews = async (
   pageNumber?: string
 ): Promise<ApiResponse<NewsResponse[]>> => {
   try {
-    const per_page = 10;
+    const per_page = Number(process.env.ITEM_PER_PAGE!);
     const current_page = Number(pageNumber) || 1;
     const offset = (current_page - 1) * per_page;
 
     const [count] = await query<ResultSelectQuery<{ total: number }>>(
       "SELECT COUNT(*) as total FROM news WHERE status = 'published'"
     );
-    const { total } = count;
-    const last_page = Math.floor(total / per_page) + 1;
-    const from = offset + 1;
-    const to = offset + per_page;
     const news = await query<ResultSelectQuery<JoinNews>>(
       "SELECT n.title, n.subtitle, n.slug, n.thumbnail_url, n.content, u.first_name, u.last_name, n.published_at FROM news n LEFT JOIN users u ON n.author_id = u.id WHERE status = 'published' ORDER BY n.created_at DESC LIMIT ? OFFSET ?",
       [per_page, offset]
     );
+    const { total } = count;
+    const last_page = Math.floor(total / per_page) + 1;
+    const from = offset + 1;
+    const to = offset + news.length;
 
     const page: Page = {
       current_page,
@@ -159,28 +159,44 @@ export const getPublishedNews = async (
       return { ...rest, author: { first_name, last_name } };
     });
 
-    return { status: "success", code: 200, data: newsResponse, page };
+    return { success: true, code: 200, data: newsResponse, page };
   } catch (error) {
     console.error(error);
-    return { status: "error", code: 500, message: "error while getting news" };
+    return { success: false, code: 500, message: "error while getting news" };
   }
 };
 
-export const getAllNews = async (page?: string): Promise<ApiResponse<News[]>> => {
+export const getAllNews = async (pageNumber?: string): Promise<ApiResponse<News[]>> => {
   try {
-    const pageNumber: number = Number(page);
+    const per_page = Number(process.env.ITEM_PER_PAGE!);
+    const current_page = Number(pageNumber) || 1;
+    const offset = (current_page - 1) * per_page;
 
-    const limit = 10;
-    const offset = ((pageNumber || 1) - 1) * limit;
+    const [count] = await query<ResultSelectQuery<{ total: number }>>(
+      "SELECT COUNT(*) as total FROM news"
+    );
     const news = await query<ResultSelectQuery<News>>(
       "SELECT * FROM news ORDER BY created_at DESC LIMIT ? OFFSET ?",
-      [limit, offset]
+      [per_page, offset]
     );
+    const { total } = count;
+    const last_page = Math.floor(total / per_page) + 1;
+    const from = offset + 1;
+    const to = offset + news.length;
 
-    return { status: "success", code: 200, data: news };
+    const page: Page = {
+      current_page,
+      last_page,
+      per_page,
+      total,
+      from,
+      to,
+    };
+
+    return { success: true, code: 200, data: news, page };
   } catch (error) {
     console.error(error);
-    return { status: "error", code: 500, message: "error while getting news" };
+    return { success: false, code: 500, message: "error while getting news" };
   }
 };
 
@@ -189,14 +205,14 @@ export const getNewsById = async (newsId: string): Promise<ApiResponse<News>> =>
     const news = await query<ResultSelectQuery<News>>("SELECT * FROM news WHERE id = ?", [newsId]);
     if (!news.length)
       return {
-        status: "error",
+        success: false,
         code: 404,
         message: "tidak ditemukan data news dengan id : " + newsId,
       };
 
-    return { status: "success", code: 200, data: news[0] };
+    return { success: true, code: 200, data: news[0] };
   } catch (error) {
     console.error(error);
-    return { status: "error", code: 500, message: "error while getting news" };
+    return { success: false, code: 500, message: "error while getting news" };
   }
 };

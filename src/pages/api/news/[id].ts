@@ -1,3 +1,4 @@
+import { doAuth } from "@/services/auth.service";
 import { getNewsById, deleteNews, publishNewsDraft } from "@/services/news.service";
 import type { News } from "@/types/db";
 import type { ApiResponse } from "@/types/response";
@@ -10,11 +11,15 @@ const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<New
     return res.status(result.code).json(result);
   }
 
+  // selain method get, harus authenticated.
+  const authError = doAuth(req);
+  if (authError) return res.status(authError.code).json(authError);
+
   if (req.method == "PATCH") {
     const id = req.query.id as string;
 
     if (!id)
-      return res.status(400).json({ status: "error", code: 400, message: "request tidak valid." });
+      return res.status(400).json({ success: false, code: 400, message: "request tidak valid." });
     const result = await publishNewsDraft(id);
     return res.status(result.code).json(result);
   }
@@ -22,12 +27,12 @@ const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<New
   if (req.method == "DELETE") {
     const id = req.query.id as string;
     if (!id)
-      return res.status(400).json({ status: "error", code: 400, message: "request tidak valid." });
+      return res.status(400).json({ success: false, code: 400, message: "request tidak valid." });
     const result = await deleteNews(id);
     return res.status(result.code).json(result);
   }
 
-  return res.status(405).json({ status: "error", code: 405, message: "METHOD NOT ALLOWED" });
+  return res.status(405).json({ success: false, code: 405, message: "METHOD NOT ALLOWED" });
 };
 
 export default handler;
