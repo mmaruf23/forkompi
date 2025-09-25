@@ -1,5 +1,5 @@
 import type { NewsRequest } from "@/types/request";
-import type { ApiResponse, NewsResponse } from "@/types/response";
+import type { ApiResponse, NewsResponse, Page } from "@/types/response";
 import { getUserProfile } from "./user.service";
 import { query } from "@/lib/db";
 import type { JoinNews, News, ResultSelectQuery, ResultSetHeader } from "@/types/db";
@@ -125,23 +125,41 @@ export const deleteNews = async (newsId: string): Promise<ApiResponse<string>> =
   return { status: "success", code: 200, data: "data berhasil dihapus." };
 };
 
-export const getPublishedNews = async (page?: string): Promise<ApiResponse<NewsResponse[]>> => {
+export const getPublishedNews = async (
+  pageNumber?: string
+): Promise<ApiResponse<NewsResponse[]>> => {
   try {
-    const pageNumber: number = Number(page);
+    const per_page = 10;
+    const current_page = Number(pageNumber) || 1;
+    const offset = (current_page - 1) * per_page;
 
-    const limit = 10;
-    const offset = ((pageNumber || 1) - 1) * limit;
+    const [count] = await query<ResultSelectQuery<{ total: number }>>(
+      "SELECT COUNT(*) as total FROM news WHERE status = 'published'"
+    );
+    const { total } = count;
+    const last_page = Math.floor(total / per_page) + 1;
+    const from = offset + 1;
+    const to = offset + per_page;
     const news = await query<ResultSelectQuery<JoinNews>>(
       "SELECT n.title, n.subtitle, n.slug, n.thumbnail_url, n.content, u.first_name, u.last_name, n.published_at FROM news n LEFT JOIN users u ON n.author_id = u.id WHERE status = 'published' ORDER BY n.created_at DESC LIMIT ? OFFSET ?",
-      [limit, offset]
+      [per_page, offset]
     );
+
+    const page: Page = {
+      current_page,
+      last_page,
+      per_page,
+      total,
+      from,
+      to,
+    };
 
     const newsResponse: NewsResponse[] = news.map((n) => {
       const { first_name, last_name, ...rest } = n;
       return { ...rest, author: { first_name, last_name } };
     });
 
-    return { status: "success", code: 200, data: newsResponse };
+    return { status: "success", code: 200, data: newsResponse, page };
   } catch (error) {
     console.error(error);
     return { status: "error", code: 500, message: "error while getting news" };
