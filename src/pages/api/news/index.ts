@@ -30,7 +30,9 @@ const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<New
   }
 
   if (req.method == "GET") {
-    const result = await getAllNews();
+    const page = req.query.page as string;
+
+    const result = await getAllNews(page);
     return res.status(result.code).json(result);
   }
 
