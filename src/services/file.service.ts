@@ -20,7 +20,7 @@ const form = formidable({ multiples: true });
 export const saveImages = async (
   imageFile: File | undefined
 ): Promise<ApiErrorResponse | string> => {
-  if (!imageFile) return { status: "error", code: 400, message: "Tidak ada gambar yang diupload." };
+  if (!imageFile) return { success: false, code: 400, message: "Tidak ada gambar yang diupload." };
 
   const allowedMimeTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
   if (!allowedMimeTypes.includes(imageFile.mimetype!)) {
@@ -29,7 +29,7 @@ export const saveImages = async (
       if (unlinkErr) console.error("Error deleting invalid file:", unlinkErr);
     });
 
-    return { status: "error", code: 400, message: "Hanya file gambar yang boleh diupload." };
+    return { success: false, code: 400, message: "Hanya file gambar yang boleh diupload." };
   }
   try {
     const fileName = `${Date.now()}${path.extname(imageFile.originalFilename!)}`;
@@ -42,7 +42,7 @@ export const saveImages = async (
   } catch (error) {
     console.error("File upload error:", error);
     return {
-      status: "error",
+      success: false,
       code: 500,
       message: "Error menyimpan file ke server.",
     };

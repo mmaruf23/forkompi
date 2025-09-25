@@ -25,7 +25,7 @@ const handler: NextApiHandler = async (
   }
 
   return res.status(405).json({
-    status: "error",
+    success: "error",
     code: 405,
     message: "METHOD NOT ALLOWED",
   });

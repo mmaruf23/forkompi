@@ -15,7 +15,7 @@ const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<New
   if (req.method == "POST") {
     const nr = await parseNewsRequest(req);
     if (!nr)
-      return res.status(500).json({ status: "error", code: 500, message: "error while parsing" });
+      return res.status(500).json({ success: "error", code: 500, message: "error while parsing" });
     const result = await createNewsDraft(nr, req.userId);
     return res.status(result.code).json(result);
   }
@@ -23,7 +23,7 @@ const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<New
   if (req.method == "PUT") {
     const nr = await parseNewsRequest(req);
     if (!nr)
-      return res.status(500).json({ status: "error", code: 500, message: "error while parsing" });
+      return res.status(500).json({ success: "error", code: 500, message: "error while parsing" });
     console.log("nr : ", nr);
     const result = await editNewsDraft(nr);
     return res.status(result.code).json(result);
@@ -36,7 +36,7 @@ const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<New
     return res.status(result.code).json(result);
   }
 
-  return res.status(405).json({ status: "error", code: 405, message: "METHOD NOT ALLOWED" });
+  return res.status(405).json({ success: "error", code: 405, message: "METHOD NOT ALLOWED" });
 };
 
 export default withAuth(handler);
