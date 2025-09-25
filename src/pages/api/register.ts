@@ -6,7 +6,7 @@ import type { NextApiHandler, NextApiResponse } from "next";
 const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<null>>) => {
   if (req.method !== "POST") {
     return res.status(405).json({
-      success: "error",
+      success: false,
       code: 405,
       message: "METHOD NOW ALLOWED",
     });

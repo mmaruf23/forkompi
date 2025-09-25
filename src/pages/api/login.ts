@@ -9,7 +9,7 @@ const handler: NextApiHandler = async (
 ) => {
   if (req.method !== "POST") {
     return res.status(405).json({
-      success: "error",
+      success: false,
       code: 405,
       message: "METHOD NOW ALLOWED",
     });
