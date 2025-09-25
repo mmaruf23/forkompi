@@ -125,11 +125,15 @@ export const deleteNews = async (newsId: string): Promise<ApiResponse<string>> =
   return { status: "success", code: 200, data: "data berhasil dihapus." };
 };
 
-export const getPublishedNews = async (): Promise<ApiResponse<NewsResponse[]>> => {
+export const getPublishedNews = async (page?: string): Promise<ApiResponse<NewsResponse[]>> => {
   try {
+    const pageNumber: number = Number(page);
+
+    const limit = 10;
+    const offset = ((pageNumber || 1) - 1) * limit;
     const news = await query<ResultSelectQuery<JoinNews>>(
-      "SELECT n.title, n.subtitle, n.slug, n.thumbnail_url, n.content, u.first_name, u.last_name, n.published_at FROM news n LEFT JOIN users u ON n.author_id = u.id WHERE status = ?",
-      ["published"]
+      "SELECT n.title, n.subtitle, n.slug, n.thumbnail_url, n.content, u.first_name, u.last_name, n.published_at FROM news n LEFT JOIN users u ON n.author_id = u.id WHERE status = 'published' ORDER BY n.created_at DESC LIMIT ? OFFSET ?",
+      [limit, offset]
     );
 
     const newsResponse: NewsResponse[] = news.map((n) => {
@@ -144,9 +148,16 @@ export const getPublishedNews = async (): Promise<ApiResponse<NewsResponse[]>> =
   }
 };
 
-export const getAllNews = async (): Promise<ApiResponse<News[]>> => {
+export const getAllNews = async (page?: string): Promise<ApiResponse<News[]>> => {
   try {
-    const news = await query<ResultSelectQuery<News>>("SELECT * FROM news");
+    const pageNumber: number = Number(page);
+
+    const limit = 10;
+    const offset = ((pageNumber || 1) - 1) * limit;
+    const news = await query<ResultSelectQuery<News>>(
+      "SELECT * FROM news ORDER BY created_at DESC LIMIT ? OFFSET ?",
+      [limit, offset]
+    );
 
     return { status: "success", code: 200, data: news };
   } catch (error) {

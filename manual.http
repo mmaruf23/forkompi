@@ -54,21 +54,21 @@ Content-Type: application/json
 
 ### TEST CREATE DRAFT NEWS ✅
 POST http://localhost:3000/api/news
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1NjM1OTk0OSwiZXhwIjoxNzU2MzYzNTQ5fQ.RC775BRYcYG15lmVJJl4zUbLQYq-K4y7mXL4vUi7F7Q
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1ODgwNDIxOSwiZXhwIjoxNzU4ODA3ODE5fQ.agQ76IMkbXGGfrf79VKbCOcvxiBNSb4MdH1ppkwugCc
 Content-Type: multipart/form-data; boundary=boundary_string
 
 --boundary_string
 Content-Disposition: form-data; name="title"
 
-Judul berita pertama.
+Judul berita kedua.
 --boundary_string
 Content-Disposition: form-data; name="subtitle"
 
-Sub-judul berita pertama.
+Sub-judul berita kedua.
 --boundary_string
 Content-Disposition: form-data; name="content"
 
-Content berita pertama.
+Content berita kedua.
 --boundary_string
 Content-Disposition: form-data; name="image"; filename="contoh.png"
 Content-Type: image/png
@@ -81,8 +81,7 @@ GET http://localhost:3000/api/news/published
 
 ### TEST GET NEWS SEBAGAI ADMIN ✅
 GET http://localhost:3000/api/news 
-Auth
-orization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1NjMxNDA1NiwiZXhwIjoxNzU2MzE3NjU2fQ.RI2W-79Mn0TuifwPTlTDJeKwFDyo0gw1QwMi4gjDOZY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1ODgwNDIxOSwiZXhwIjoxNzU4ODA3ODE5fQ.agQ76IMkbXGGfrf79VKbCOcvxiBNSb4MdH1ppkwugCc
 
 ### TEST GET NEWS BY ID ✅
 GET http://localhost:3000/api/news/11
@@ -112,7 +111,7 @@ Content-Type: image/png
 --boundary_string--
 
 ### TEST PUBLISH NEWS ✅
-PATCH http://localhost:3000/api/news/11
+PATCH http://localhost:3000/api/news/12
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1NjM2NzU2OCwiZXhwIjoxNzU2MzcxMTY4fQ.MZAQ2JOe-wZGtD9i0C3ETY8iZiOuyw4F2yaMyin3gMc
 
 
@@ -121,4 +120,4 @@ DELETE http://localhost:3000/api/news/11
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1NjM2NzU2OCwiZXhwIjoxNzU2MzcxMTY4fQ.MZAQ2JOe-wZGtD9i0C3ETY8iZiOuyw4F2yaMyin3gMc
 
 ### TEST GET IMAGE ✅
-GET http://localhost:3000/file/images/1756362318883-updated.png
+GET http://localhost:3000/file/images/1758804608669.png

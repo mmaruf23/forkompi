@@ -2,6 +2,14 @@ export type ApiSuccessResponse<T> = {
   code: number;
   status: "success";
   data?: T;
+  page?: {
+    current_page: number;
+    last_page: number;
+    per_page: number;
+    total: number;
+    from: number;
+    to: number;
+  };
 };
 
 export type ApiErrorResponse = {

@@ -6,7 +6,9 @@ const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<New
   if (req.method !== "GET")
     return res.status(405).json({ status: "error", code: 405, message: "METHOD NOT ALLOWED" });
   try {
-    const result = await getPublishedNews();
+    const page = req.query.page as string | undefined;
+
+    const result = await getPublishedNews(page);
     return res.status(result.code).json(result);
   } catch (error) {
     console.error(error);
