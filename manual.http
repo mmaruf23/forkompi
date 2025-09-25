@@ -31,7 +31,7 @@ Content-Type: application/json
 
 ### TEST GET PROFILE ✅
 GET http://localhost:3000/api/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1NjM1NTk3MCwiZXhwIjoxNzU2MzU5NTcwfQ.0KPlH23gCWbwU7K5OaZoLj6HIzzBxSTAEgg2bvgNGGQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1ODgxMjQ1NCwiZXhwIjoxNzU4ODE2MDU0fQ.nlT--v2NubK_fE-qz7jVmzvft4Swuhpwaf0tNR2apyg
 
 ### TEST UPDATE PROFILE ✅
 POST http://localhost:3000/api/profile
@@ -54,21 +54,21 @@ Content-Type: application/json
 
 ### TEST CREATE DRAFT NEWS ✅
 POST http://localhost:3000/api/news
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1ODgwNDIxOSwiZXhwIjoxNzU4ODA3ODE5fQ.agQ76IMkbXGGfrf79VKbCOcvxiBNSb4MdH1ppkwugCc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1ODgxNjE1OSwiZXhwIjoxNzU4ODE5NzU5fQ.foXjPtrgTSYfKtdLgJJMbed-xqvePm5_bDC_3WppDrw
 Content-Type: multipart/form-data; boundary=boundary_string
 
 --boundary_string
 Content-Disposition: form-data; name="title"
 
-Judul berita kedua.
+Judul berita sebelas.
 --boundary_string
 Content-Disposition: form-data; name="subtitle"
 
-Sub-judul berita kedua.
+Sub-judul berita sebelas.
 --boundary_string
 Content-Disposition: form-data; name="content"
 
-Content berita kedua.
+Content berita sebelas.
 --boundary_string
 Content-Disposition: form-data; name="image"; filename="contoh.png"
 Content-Type: image/png
@@ -77,11 +77,11 @@ Content-Type: image/png
 --boundary_string--
 
 ### TEST GET NEWS SEBAGAI PUBLIC ✅
-GET http://localhost:3000/api/news/published 
+GET http://localhost:3000/api/news
 
 ### TEST GET NEWS SEBAGAI ADMIN ✅
-GET http://localhost:3000/api/news 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1ODgwNDIxOSwiZXhwIjoxNzU4ODA3ODE5fQ.agQ76IMkbXGGfrf79VKbCOcvxiBNSb4MdH1ppkwugCc
+GET http://localhost:3000/api/news?page=3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1ODgxNDU4OCwiZXhwIjoxNzU4ODE4MTg4fQ.F9T-qFqS0jFj3-w5pYJHZP-1rAuohcB4cfAAMwbAioQ
 
 ### TEST GET NEWS BY ID ✅
 GET http://localhost:3000/api/news/11

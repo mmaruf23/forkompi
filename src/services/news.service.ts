@@ -129,21 +129,21 @@ export const getPublishedNews = async (
   pageNumber?: string
 ): Promise<ApiResponse<NewsResponse[]>> => {
   try {
-    const per_page = 10;
+    const per_page = Number(process.env.ITEM_PER_PAGE!);
     const current_page = Number(pageNumber) || 1;
     const offset = (current_page - 1) * per_page;
 
     const [count] = await query<ResultSelectQuery<{ total: number }>>(
       "SELECT COUNT(*) as total FROM news WHERE status = 'published'"
     );
-    const { total } = count;
-    const last_page = Math.floor(total / per_page) + 1;
-    const from = offset + 1;
-    const to = offset + per_page;
     const news = await query<ResultSelectQuery<JoinNews>>(
       "SELECT n.title, n.subtitle, n.slug, n.thumbnail_url, n.content, u.first_name, u.last_name, n.published_at FROM news n LEFT JOIN users u ON n.author_id = u.id WHERE status = 'published' ORDER BY n.created_at DESC LIMIT ? OFFSET ?",
       [per_page, offset]
     );
+    const { total } = count;
+    const last_page = Math.floor(total / per_page) + 1;
+    const from = offset + 1;
+    const to = offset + news.length;
 
     const page: Page = {
       current_page,
@@ -168,21 +168,22 @@ export const getPublishedNews = async (
 
 export const getAllNews = async (pageNumber?: string): Promise<ApiResponse<News[]>> => {
   try {
-    const per_page = 10;
+    const per_page = Number(process.env.ITEM_PER_PAGE!);
     const current_page = Number(pageNumber) || 1;
     const offset = (current_page - 1) * per_page;
 
     const [count] = await query<ResultSelectQuery<{ total: number }>>(
       "SELECT COUNT(*) as total FROM news"
     );
-    const { total } = count;
-    const last_page = Math.floor(total / per_page) + 1;
-    const from = offset + 1;
-    const to = offset + per_page;
     const news = await query<ResultSelectQuery<News>>(
       "SELECT * FROM news ORDER BY created_at DESC LIMIT ? OFFSET ?",
       [per_page, offset]
     );
+    const { total } = count;
+    const last_page = Math.floor(total / per_page) + 1;
+    const from = offset + 1;
+    const to = offset + news.length;
+
     const page: Page = {
       current_page,
       last_page,

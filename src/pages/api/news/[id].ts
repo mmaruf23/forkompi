@@ -1,3 +1,4 @@
+import { doAuth } from "@/services/auth.service";
 import { getNewsById, deleteNews, publishNewsDraft } from "@/services/news.service";
 import type { News } from "@/types/db";
 import type { ApiResponse } from "@/types/response";
@@ -9,6 +10,10 @@ const handler: NextApiHandler = async (req, res: NextApiResponse<ApiResponse<New
     const result = await getNewsById(id);
     return res.status(result.code).json(result);
   }
+
+  // selain method get, harus authenticated.
+  const authError = doAuth(req);
+  if (authError) return res.status(authError.code).json(authError);
 
   if (req.method == "PATCH") {
     const id = req.query.id as string;

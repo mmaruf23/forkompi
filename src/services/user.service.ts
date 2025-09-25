@@ -8,16 +8,16 @@ export const getUserProfile = async (
   userId: number | undefined
 ): Promise<ApiResponse<UserResponse>> => {
   try {
-    if (!userId) return { success: "error", code: 400, message: "User tidak valid." };
+    if (!userId) return { success: false, code: 400, message: "User tidak valid." };
 
     const users = await query<ResultSelectQuery<User>>("SELECT * FROM users where id = ?", [
       userId,
     ]);
 
-    if (!users.length) return { success: "error", code: 404, message: "User tidak ditemukan." };
+    if (!users.length) return { success: false, code: 404, message: "User tidak ditemukan." };
 
     return {
-      success: "success",
+      success: true,
       code: 200,
       data: {
         username: users[0].username,
@@ -28,7 +28,7 @@ export const getUserProfile = async (
   } catch (error) {
     console.error(error);
     return {
-      success: "error",
+      success: false,
       code: 500,
       message: "Terjadi kesalahan.",
     };
@@ -40,16 +40,16 @@ export const updateUserProfile = async (
   ur: UpdateUserRequest
 ): Promise<ApiResponse<null>> => {
   try {
-    if (!userId) return { success: "error", code: 404, message: "User belum login." };
+    if (!userId) return { success: false, code: 404, message: "User belum login." };
     const { username, firstName, password, lastName } = ur;
     if (!username && !firstName && !password && !lastName)
-      return { success: "error", code: 400, message: "Data tidak valid!" };
+      return { success: false, code: 400, message: "Data tidak valid!" };
 
     const users = await query<ResultSelectQuery<User>>("SELECT * FROM users where id = ?", [
       userId,
     ]);
 
-    if (!users.length) return { success: "error", code: 404, message: "User tidak ditemukan." };
+    if (!users.length) return { success: false, code: 404, message: "User tidak ditemukan." };
 
     const user = users[0];
     if (username && user.username !== username) {
@@ -58,7 +58,7 @@ export const updateUserProfile = async (
         [username]
       );
       if (isDuplicate.length) {
-        return { success: "error", code: 409, message: "Usernama sudah digunakan!" };
+        return { success: false, code: 409, message: "Usernama sudah digunakan!" };
       }
 
       user.username = username;
@@ -73,16 +73,16 @@ export const updateUserProfile = async (
       [user.username, user.first_name, user.last_name, user.password_hash, userId]
     );
     if (!result.affectedRows)
-      return { success: "error", code: 500, message: "Error saat update data." };
+      return { success: false, code: 500, message: "Error saat update data." };
 
     return {
-      success: "success",
+      success: true,
       code: 200,
     };
   } catch (error) {
     console.error(error);
     return {
-      success: "error",
+      success: false,
       code: 500,
       message: "Internal Server Error",
     };

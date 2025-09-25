@@ -1,10 +1,10 @@
 import { query } from "@/lib/db";
 import type { ResultSetHeader, ResultSelectQuery, User } from "@/types/db";
 import type { LoginRequest, RegisterRequest } from "@/types/request";
-import type { ApiResponse } from "@/types/response";
+import type { ApiErrorResponse, ApiResponse } from "@/types/response";
 import bcrypt from "bcryptjs";
 import { sign, verify, type VerifyErrors } from "jsonwebtoken";
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest } from "next";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {
@@ -17,6 +17,11 @@ export type JwtPayload = {
   iat: number; // Issued at
   exp: number; // Expiration time
 };
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("Unhandled Rejection at:", promise, "reason:", reason);
+  // Hentikan proses jika perlu, atau kirim notifikasi
+});
 
 export const registerUser = async (rr: RegisterRequest): Promise<ApiResponse<null>> => {
   try {
@@ -75,31 +80,36 @@ export const loginUser = async (lr: LoginRequest): Promise<ApiResponse<{ token: 
   }
 };
 
-export const withAuth = (handler: NextApiHandler) => {
-  return async (req: NextApiRequest, res: NextApiResponse) => {
-    const authorization = req.headers["authorization"];
-    if (!authorization) {
-      return res.status(401).json({
-        success: false,
-        code: 401,
-        message: "Missing Authorization Token.",
-      });
-    }
+export const doAuth = (req: NextApiRequest): ApiErrorResponse | null => {
+  console.log("menjalankan doauth");
+  const authorization = req.headers["authorization"];
+  if (!authorization) {
+    return {
+      success: false,
+      code: 401,
+      message: "Missing Authorization Token.",
+    };
+  }
 
-    let decoded: JwtPayload;
-    try {
-      const token = authorization.split(" ")[1];
-      decoded = verify(token, JWT_SECRET) as JwtPayload;
-    } catch (error) {
-      const verifyErrors = error as VerifyErrors;
-      return res.status(401).json({
-        success: false,
-        code: 401,
-        message: verifyErrors.message || "Authorization Error",
-      });
-    }
+  console.log("tahap 2");
+
+  let decoded: JwtPayload;
+  try {
+    console.log("tahap 3");
+    const token = authorization.split(" ")[1];
+    console.log("token", token);
+    console.log("jwtsec", JWT_SECRET);
+    decoded = verify(token, JWT_SECRET) as JwtPayload;
+    console.log("decoded : ", decoded);
     req.userId = decoded.userId;
-
-    return handler(req, res);
-  };
+    console.log("tahap 4 done");
+    return null;
+  } catch (error) {
+    const verifyErrors = error as VerifyErrors;
+    return {
+      success: false,
+      code: 401,
+      message: verifyErrors.message || "Authorization Error",
+    };
+  }
 };
