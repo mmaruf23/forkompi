@@ -80,7 +80,7 @@ export const withAuth = (handler: NextApiHandler) => {
     const authorization = req.headers["authorization"];
     if (!authorization) {
       return res.status(401).json({
-        status: "error",
+        success: false,
         code: 401,
         message: "Missing Authorization Token.",
       });
@@ -93,7 +93,7 @@ export const withAuth = (handler: NextApiHandler) => {
     } catch (error) {
       const verifyErrors = error as VerifyErrors;
       return res.status(401).json({
-        status: "error",
+        success: false,
         code: 401,
         message: verifyErrors.message || "Authorization Error",
       });
