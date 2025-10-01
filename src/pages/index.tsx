@@ -17,53 +17,60 @@ const HomePage = () => {
           descp="Forum Komunikasi Mahasiswa Poltekkes Kemenkes Se Indonesia."
           imageSrc="/home_image_background.jpg"
         />
-
-        {/* Button at the bottom center of Hero */}
+        {/* Button at the bottom center of Hero */}{" "}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-red-700 text-white px-6 py-4 rounded-sm shadow-lg transition">
+          {" "}
           <Link className="hover:scale-120 transition-transform" href="www.instagram.com">
-            <FaInstagram size={30} />
-          </Link>
+            {" "}
+            <FaInstagram size={30} />{" "}
+          </Link>{" "}
           <Link className="hover:scale-120 transition-transform" href="www.tiktok.com">
-            <FaTiktok size={25} />
-          </Link>
+            {" "}
+            <FaTiktok size={25} />{" "}
+          </Link>{" "}
           <Link className="hover:scale-120 transition-transform" href="www.gmail.com">
-            <SiGmail size={30} />
-          </Link>
+            {" "}
+            <SiGmail size={30} />{" "}
+          </Link>{" "}
           <Link className="hover:scale-120 transition-transform" href="www.telegram.com">
-            <FaTelegramPlane size={30} />
-          </Link>
+            {" "}
+            <FaTelegramPlane size={30} />{" "}
+          </Link>{" "}
           <Link className="hover:scale-120 transition-transform" href="www.youtube.com">
-            <FaYoutube size={30} />
-          </Link>
+            {" "}
+            <FaYoutube size={30} />{" "}
+          </Link>{" "}
           <Link className="hover:scale-120 transition-transform" href="www.twitter.com">
-            <FaXTwitter size={30} />
-          </Link>
+            {" "}
+            <FaXTwitter size={30} />{" "}
+          </Link>{" "}
           <Link className="hover:scale-120 transition-transform" href="www.facebook.com">
-            <FaFacebook size={30} />
-          </Link>
-        </div>
+            {" "}
+            <FaFacebook size={30} />{" "}
+          </Link>{" "}
+        </div>{" "}
       </div>
 
       {/* Tentang Kami Section */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full h-auto bg-white px-10 py-16">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full bg-white px-6 sm:px-10 py-10 sm:py-16">
         {/* Left Text */}
-        <div className="md:w-1/2">
-          <div className="w-64 h-2 bg-red-600 mb-4"></div>
-          <h2 className="text-5xl font-bold mb-7 text-black">Tentang Kami</h2>
-          <p className=" text-gray-700 leading-relaxed mb-4 text-lg">
+        <div id="about" className="md:w-1/2 text-justify">
+          <div className="w-32 sm:w-64 h-2 bg-red-600 mb-4"></div>
+          <h2 className="text-3xl sm:text-5xl font-bold mb-6 text-black">Tentang Kami</h2>
+          <p className="text-gray-700 leading-relaxed mb-4 text-base sm:text-lg">
             <span className="font-semibold text-black">FORKOMPI</span> adalah Forum Komunikasi
             Mahasiswa Politeknik Kesehatan Se-Indonesia. Sejak didirikan pada tahun 2004, kami telah
             berkomitmen untuk menjadi wadah sinergi antar Poltekkes Kemenkes se-Indonesia, dengan
             tujuan utama meningkatkan kapabilitas dan revitalisasi sesuai dengan nilai-nilai
             Pancasila dan Tri Dharma perguruan tinggi.
           </p>
-          <p className=" text-gray-700 leading-relaxed mb-4 text-lg">
+          <p className="text-gray-700 leading-relaxed mb-4 text-base sm:text-lg">
             Di FORKOMPI, kami memahami pentingnya interaksi yang efektif antar anggota untuk
             mencapai tujuan bersama. Oleh karena itu, kami berupaya keras untuk meningkatkan
             komunikasi antar Poltekkes Kemenkes Se-Indonesia, memfasilitasi kolaborasi yang lebih
             baik dalam berbagai bidang kesehatan.
           </p>
-          <p className=" text-gray-700 leading-relaxed text-lg w-full">
+          <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
             Reformasi menjadi inti dari perjalanan kami. Kami tidak hanya ingin menjadi sebuah
             forum, tetapi juga sebuah organisasi yang mampu menciptakan perubahan yang signifikan.
             Melalui reformasi terus-menerus, kami berusaha untuk memperbaiki diri, mengikuti
@@ -73,13 +80,13 @@ const HomePage = () => {
         </div>
 
         {/* Right Image */}
-        <div className="md:w-1/2 flex justify-center pt-10">
+        <div className="md:w-1/2 flex justify-center pt-6 md:pt-10">
           <ImageShadowed src="/news_image_background.jpg" value={-16} color={"red"} />
         </div>
       </div>
 
-      {/** Visi Forkompi */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full h-auto bg-white px-10 py-16">
+      {/* Visi Forkompi */}
+      <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full bg-white px-6 sm:px-10 py-10 sm:py-16">
         {/* Left Image */}
         <div className="md:w-1/2 flex justify-center">
           <ImageShadowed src="/kongres.jpg" value={-16} color={"yellow"} />
@@ -89,10 +96,12 @@ const HomePage = () => {
         <div className="md:w-1/2">
           <div>
             <div className="flex justify-end">
-              <div className="w-64 h-2 bg-red-600 mb-4"></div>
+              <div className="w-32 sm:w-64 h-2 bg-red-600 mb-4"></div>
             </div>
-            <h2 className="text-right text-5xl font-bold mb-7 text-black">Visi Forkompi</h2>
-            <p className="text-right text-gray-700 leading-relaxed mb-4 text-lg">
+            <h2 className="text-3xl sm:text-5xl text-right font-bold mb-6 text-black">
+              Visi Forkompi
+            </h2>
+            <p className="text-right text-gray-700 leading-relaxed text-base sm:text-lg">
               Visi kami adalah meningkatkan sinergi kapabilitas, serta revitalisasi antar Poltekkes
               Kemenkes Se- Indonesia sesuai Pancasila dan Tri dharma perguruan tinggi.
             </p>
@@ -100,17 +109,19 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/** Misi Forkompi */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full h-auto bg-white px-10 py-16">
+      {/* Misi Forkompi */}
+      <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full bg-white px-6 sm:px-10 py-10 sm:py-16">
         {/* Left Text */}
         <div className="md:w-1/2">
           <div>
-            <div className="w-64 h-2 bg-red-600 mb-4"></div>
-            <h2 className="text-left text-5xl font-bold mb-7 text-black">Misi Forkompi</h2>
-            <span className="text-left text-gray-700 leading-relaxed mb-4 text-lg">
+            <div className="w-32 sm:w-64 h-2 bg-red-600 mb-4"></div>
+            <h2 className="text-3xl sm:text-5xl text-left font-bold mb-6 text-black">
+              Misi Forkompi
+            </h2>
+            <span className="text-left text-gray-700 leading-relaxed text-base sm:text-lg">
               Misi kami adalah memberdayakan remaja untuk menjalani masa transisi mereka dengan
               sehat dan bahagia. Kami berkomitmen untuk:
-              <ul className="list-disc list-inside">
+              <ul className="list-disc list-inside mt-2 space-y-1">
                 <li>Memberikan informasi yang akurat dan terpercaya.</li>
                 <li>Menyediakan dukungan untuk masalah kesehatan fisik dan mental.</li>
                 <li>Membangun komunitas yang mendukung pertumbuhan positif remaja.</li>
@@ -120,22 +131,24 @@ const HomePage = () => {
         </div>
 
         {/* Right Image */}
-        <div className="md:w-1/2 flex justify-center">
+        <div className="md:w-1/2 flex justify-center pt-6 md:pt-0">
           <ImageShadowed src="/image3.jpg" value={-16} color={"green"} />
         </div>
       </div>
 
-      {/** Kegiatan Forkompi */}
-      <div className="flex flex-col w-full h-full bg-white px-10 py-16 justify-center">
+      {/* Kegiatan Forkompi */}
+      <div className="flex flex-col w-full bg-white px-6 sm:px-10 py-10 sm:py-16 justify-center">
         <div className="flex flex-col items-center">
-          <div className="w-64 h-2 bg-red-600 mb-4"></div>
-          <h2 className="text-5xl font-bold mb-12 text-black text-center">Kegiatan Forkompi</h2>
+          <div className="w-32 sm:w-64 h-2 bg-red-600 mb-4"></div>
+          <h2 className="text-3xl sm:text-5xl font-bold mb-10 sm:mb-12 text-black text-center">
+            Kegiatan Forkompi
+          </h2>
         </div>
 
         {/* Top row */}
         <div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="col-span-1 h-[450px]">
+            <div className="col-span-1 h-56 sm:h-80 lg:h-[450px]">
               <Image
                 src="/home_image_background.jpg"
                 alt="Gallery 1"
@@ -144,7 +157,7 @@ const HomePage = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="col-span-1 h-[450px]">
+            <div className="col-span-1 h-56 sm:h-80 lg:h-[450px]">
               <Image
                 src="/news_image_background.jpg"
                 alt="Gallery 2"
@@ -153,7 +166,7 @@ const HomePage = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="col-span-1 h-[450px]">
+            <div className="col-span-1 h-56 sm:h-80 lg:h-[450px]">
               <Image
                 src="/kongres.jpg"
                 alt="Gallery 3"
@@ -168,7 +181,7 @@ const HomePage = () => {
         {/* Bottom row */}
         <div className="pt-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="col-span-1  h-[500px]">
+            <div className="col-span-1 h-64 sm:h-96 lg:h-[500px]">
               <Image
                 src="/image3.jpg"
                 alt="Gallery 1"
@@ -177,7 +190,7 @@ const HomePage = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="col-span-1 h-[500px]">
+            <div className="col-span-1 h-64 sm:h-96 lg:h-[500px]">
               <Image
                 src="/news_image_background2.jpg"
                 alt="Gallery 2"
