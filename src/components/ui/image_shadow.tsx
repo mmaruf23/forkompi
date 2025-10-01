@@ -28,7 +28,7 @@ const ImageShadowed = ({ src, value, color }: ImageShadowedProps) => {
       : "bg-black";
   return (
     <div className={`${shadowShave} ${bgColor}`}>
-      <div className="w-[300px] h-[250px] relative hover:w-[400px] hover:h-[350px] transition-all">
+      <div className="w-[300px] h-[250px] relative transition-all">
         <Image
           src={src}
           alt="IMAGE"
