@@ -18,29 +18,94 @@ const ProgranPage = () => {
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-center">
             <thead>
-              <tr className="bg-red-600 text-white">
-                <th className="border border-white px-4 py-2">
+              <tr className="bg-white text-black">
+                <th className="border-2 border-red-700 px-4 py-2">
                   Nama Kegiatan <br /> (Program Kerja)
                 </th>
-                <th className="border border-white px-4 py-2">Bidang</th>
-                <th className="border border-white px-4 py-2">
+                <th className="border-2 border-red-700 px-4 py-2">Bidang</th>
+                <th className="border-2 border-red-700 px-4 py-2">
                   Pelaksanaan Kegiatan <br /> (Bulan)
                 </th>
               </tr>
             </thead>
             <tbody>
+              {/* 1 */}
               <tr className="bg-red-700 text-white">
-                <td className="border border-white px-4 py-2">Ramadhan Berkah</td>
-                <td className="border border-white px-4 py-2">Pemas</td>
-                <td className="border border-white px-4 py-2">Maret</td>
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Ramadhan Berkah
+                </td>
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Pemas
+                </td>
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Maret
+                </td>
               </tr>
-              {[...Array(7)].map((_, i) => (
-                <tr key={i} className="bg-red-700 text-white">
-                  <td className="border border-white px-4 py-6"></td>
-                  <td className="border border-white px-4 py-6"></td>
-                  <td className="border border-white px-4 py-6"></td>
-                </tr>
-              ))}
+
+              {/* 2 */}
+              <tr className="bg-red-700 text-white">
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Ramadhan Berkah
+                </td>
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Pemas
+                </td>
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Maret
+                </td>
+              </tr>
+
+              {/* 3 */}
+              <tr className="bg-red-700 text-white">
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Ramadhan Berkah
+                </td>
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Pemas
+                </td>
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Maret
+                </td>
+              </tr>
+
+              {/* 4 */}
+              <tr className="bg-red-700 text-white">
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Ramadhan Berkah
+                </td>
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Pemas
+                </td>
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Maret
+                </td>
+              </tr>
+
+              {/* 5 */}
+              <tr className="bg-red-700 text-white">
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Ramadhan Berkah
+                </td>
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Pemas
+                </td>
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Maret
+                </td>
+              </tr>
+
+              {/* 6 */}
+              <tr className="bg-red-700 text-white">
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Ramadhan Berkah
+                </td>
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Pemas
+                </td>
+                <td className="border-x-2 border-x-red-700 border-y-2 border-y-white px-4 py-2">
+                  Maret
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
