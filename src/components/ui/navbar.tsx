@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { Menu, X } from "lucide-react"; // install: npm install lucide-react
+import { BiMenu, BiX } from "react-icons/bi";
 
 type NavItem = {
   href: string;
@@ -48,7 +48,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button className="md:hidden text-red-600" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
+          {isOpen ? <BiX size={28} /> : <BiMenu size={28} />}
         </button>
       </div>
 
