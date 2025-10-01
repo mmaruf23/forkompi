@@ -18,11 +18,6 @@ export type JwtPayload = {
   exp: number; // Expiration time
 };
 
-process.on("unhandledRejection", (reason, promise) => {
-  console.error("Unhandled Rejection at:", promise, "reason:", reason);
-  // Hentikan proses jika perlu, atau kirim notifikasi
-});
-
 export const registerUser = async (rr: RegisterRequest): Promise<ApiResponse<null>> => {
   try {
     const { username, firstName, lastName = "", password }: RegisterRequest = rr;
@@ -81,7 +76,6 @@ export const loginUser = async (lr: LoginRequest): Promise<ApiResponse<{ token: 
 };
 
 export const doAuth = (req: NextApiRequest): ApiErrorResponse | null => {
-  console.log("menjalankan doauth");
   const authorization = req.headers["authorization"];
   if (!authorization) {
     return {
@@ -91,18 +85,11 @@ export const doAuth = (req: NextApiRequest): ApiErrorResponse | null => {
     };
   }
 
-  console.log("tahap 2");
-
   let decoded: JwtPayload;
   try {
-    console.log("tahap 3");
     const token = authorization.split(" ")[1];
-    console.log("token", token);
-    console.log("jwtsec", JWT_SECRET);
     decoded = verify(token, JWT_SECRET) as JwtPayload;
-    console.log("decoded : ", decoded);
     req.userId = decoded.userId;
-    console.log("tahap 4 done");
     return null;
   } catch (error) {
     const verifyErrors = error as VerifyErrors;
