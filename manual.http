@@ -26,7 +26,7 @@ Content-Type: application/json
 
 {
   "username": "mmaruf",
-  "password": "masihrahasia"
+  "password": "rahasia"
 }
 
 ### TEST GET PROFILE ✅
@@ -54,7 +54,7 @@ Content-Type: application/json
 
 ### TEST CREATE DRAFT NEWS ✅
 POST http://localhost:3000/api/news
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1ODgxNjE1OSwiZXhwIjoxNzU4ODE5NzU5fQ.foXjPtrgTSYfKtdLgJJMbed-xqvePm5_bDC_3WppDrw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoibW1hcnVmIiwiaWF0IjoxNzU5MzA5MjMyLCJleHAiOjE3NTkzMTI4MzJ9.VBHBnlvGYSeIrbV7cZ-Eve5azlhJpMr4Rxj-b8TZEH4
 Content-Type: multipart/form-data; boundary=boundary_string
 
 --boundary_string
@@ -80,8 +80,8 @@ Content-Type: image/png
 GET http://localhost:3000/api/news
 
 ### TEST GET NEWS SEBAGAI ADMIN ✅
-GET http://localhost:3000/api/news?page=3
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1ODgxNDU4OCwiZXhwIjoxNzU4ODE4MTg4fQ.F9T-qFqS0jFj3-w5pYJHZP-1rAuohcB4cfAAMwbAioQ
+GET http://localhost:3000/api/news?page=2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoibW1hcnVmIiwiaWF0IjoxNzU5MzA5MjMyLCJleHAiOjE3NTkzMTI4MzJ9.VBHBnlvGYSeIrbV7cZ-Eve5azlhJpMr4Rxj-b8TZEH4
 
 ### TEST GET NEWS BY ID ✅
 GET http://localhost:3000/api/news/11

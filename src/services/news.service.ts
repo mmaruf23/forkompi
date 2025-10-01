@@ -142,8 +142,8 @@ export const getPublishedNews = async (
     );
     const { total } = count;
     const last_page = Math.floor(total / per_page) + 1;
-    const from = offset + 1;
-    const to = offset + news.length;
+    const from = news.length ? offset + 1 : 0;
+    const to = news.length ? offset + news.length : 0;
 
     const page: Page = {
       current_page,
@@ -181,8 +181,8 @@ export const getAllNews = async (pageNumber?: string): Promise<ApiResponse<News[
     );
     const { total } = count;
     const last_page = Math.floor(total / per_page) + 1;
-    const from = offset + 1;
-    const to = offset + news.length;
+    const from = news.length ? offset + 1 : 0;
+    const to = news.length ? offset + news.length : 0;
 
     const page: Page = {
       current_page,
