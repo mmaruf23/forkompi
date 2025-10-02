@@ -1,6 +1,6 @@
 import Hero from "@/components/ui/hero";
 import NewsCard from "@/components/ui/news_card";
-import { dummy_newses } from "@/lib/dummy";
+import { dummy_newses } from "@/libs/dummy";
 import type { News } from "@/types/db";
 import { formatDate } from "@/utils/time";
 import Image from "next/image";

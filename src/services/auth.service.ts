@@ -1,4 +1,4 @@
-import { query } from "@/lib/db";
+import { query } from "@/libs/db";
 import type { ResultSetHeader, ResultSelectQuery, User } from "@/types/db";
 import type { LoginRequest, RegisterRequest } from "@/types/request";
 import type { ApiErrorResponse, ApiResponse } from "@/types/response";

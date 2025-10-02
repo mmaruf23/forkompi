@@ -7,7 +7,7 @@ const ProgranPage = () => {
       <Hero
         title="program"
         descp="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, tenetur."
-        imageSrc="/Program.jpg"
+        imageSrc="/Program.JPG"
       />
       <div className="px-4 sm:px-14 pb-10">
         <div className="my-5 sm:my-10">

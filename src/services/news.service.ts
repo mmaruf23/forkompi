@@ -1,7 +1,7 @@
 import type { NewsRequest } from "@/types/request";
 import type { ApiResponse, NewsResponse, Page } from "@/types/response";
 import { getUserProfile } from "./user.service";
-import { query } from "@/lib/db";
+import { query } from "@/libs/db";
 import type { JoinNews, News, ResultSelectQuery, ResultSetHeader } from "@/types/db";
 import slugify from "slugify";
 import { saveImages } from "./file.service";
