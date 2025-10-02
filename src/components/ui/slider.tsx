@@ -8,6 +8,7 @@ import {
   useMotionValueEvent,
   useScroll,
 } from "motion/react";
+import Image from "next/image";
 import { useRef } from "react";
 
 export default function ScrollLinked() {
@@ -22,12 +23,69 @@ export default function ScrollLinked() {
         style={{ maskImage }}
         className="flex list-none h-[160px] sm:h-[400px] overflow-x-scroll px-0 py-5 mx-auto gap-5 scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200"
       >
-        <li className="flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#ff0088]">a</li>
-        <li className="flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#dd00ee]">a</li>
-        <li className="flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#9911ff]">a</li>
-        <li className="flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#0d63f8]">a</li>
-        <li className="flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#0cdcf7]">a</li>
-        <li className="flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#8df0cc]">a</li>
+        <li className="relative flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#ff0088]">
+          <Image
+            src="/Kegiatan1.jpg"
+            alt="Kegiatan1"
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 160px, 400px"
+          />
+        </li>
+        <li className="relative flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#dd00ee]">
+          <Image
+            src="/Kegiatan2.jpg"
+            alt="Kegiatan2"
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 160px, 400px"
+          />
+        </li>
+        <li className="relative flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#9911ff]">
+          <Image
+            src="/Kegiatan3.jpg"
+            alt="Kegiatan3"
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 160px, 400px"
+          />
+        </li>
+        <li className="relative flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#0d63f8]">
+          <Image
+            src="/Kegiatan4.jpg"
+            alt="Kegiatan4"
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 160px, 400px"
+          />
+        </li>
+        <li className="relative flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#0cdcf7]">
+          <Image
+            src="/Kegiatan5.jpg"
+            alt="Kegiatan5"
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 160px, 400px"
+          />
+        </li>
+        <li className="relative flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#8df0cc]">
+          <Image
+            src="/Kegiatan6.jpg"
+            alt="Kegiatan6"
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 160px, 400px"
+          />
+        </li>
+        <li className="relative flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#8df0ac]">
+          <Image
+            src="/Kegiatan7.jpg"
+            alt="Kegiatan7"
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 160px, 400px"
+          />
+        </li>
       </motion.ul>
     </div>
   );

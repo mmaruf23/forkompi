@@ -8,11 +8,7 @@ import { HiShare } from "react-icons/hi";
 const NewsPage = () => {
   return (
     <div className="min-h-svh w-full bg-white">
-      <Hero
-        title="news"
-        descp="Lorem ipsum dolor sit amet, cons ctetur adipisicing elit. Cupiditate, tenetur."
-        imageSrc="/news_image_background.jpg"
-      />
+      <Hero title="news" descp="Berita Terbaru dan Terpercaya di Forkompi." imageSrc="/News.jpg" />
       <div className="px-4 sm:px-14">
         <div className="my-10 sm:my-20">
           <div className="w-32 sm:w-64 h-2 bg-red-600 mb-4"></div>
