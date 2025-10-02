@@ -34,12 +34,11 @@ const NewsPage = () => {
               <p className="text-2xl sm:text-3xl text-white line-clamp-2">
                 Lorem ipsum dolor sit amet.
               </p>
-              <p className="text-base sm:text-xl line-clamp-6">
+              <p className="text-base sm:text-xl line-clamp-9">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus ea, optio assumenda
-                eum eius neque?
-              </p>
-              <p className="text-base sm:text-xl line-clamp-2">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, aperiam?
+                eum eius neque? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus ea,
+                optio assumenda eum eius neque? Lorem ipsum, dolor sit amet consectetur adipisicing
+                elit. Minus ea, optio assumenda eum eius neque?
               </p>
               <div className="flex-grow flex justify-between items-end text-sm sm:text-base">
                 <HiShare className="text-white text-xl sm:text-2xl" />
@@ -59,19 +58,18 @@ const NewsPage = () => {
             />
             <div className="absolute bottom-0 bg-black/70 text-white/80 h-[40%] p-4 sm:p-6">
               <p className="text-lg sm:text-2xl text-white">Lorem ipsum dolor sit amet.</p>
-              <p className="text-sm sm:text-md mt-2 sm:mt-4 line-clamp-2">
+              <p className="text-sm sm:text-md mt-2 sm:mt-4 line-clamp-4">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sunt sapiente eligendi
-                nihil doloremque magni iusto ratione ut quis dolorum?
-              </p>
-              <p className="text-sm sm:text-md mt-2 sm:mt-4 line-clamp-1">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi, cupiditate.
+                nihil doloremque magni iusto ratione ut quis dolorum? Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Ea sunt sapiente eligendi nihil doloremque magni iusto
+                ratione ut quis dolorum?
               </p>
             </div>
           </div>
         </div>
 
         {/* News List */}
-        <div className="mt-20 sm:mt-40 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
+        <div className="sm:mt-40 grid sm:grid-cols-2 grid-cols-2 mt-20 lg:grid-cols-4 gap-4 sm:gap-8">
           {dummy_newses.map((n, i) => (
             <NewsCard {...n} key={i} />
           ))}

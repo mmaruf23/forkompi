@@ -1,15 +1,38 @@
+"use client";
+
 import Hero from "@/components/ui/hero";
 import ImageShadowed from "@/components/ui/image_shadow";
-import React from "react";
+import React, { useRef } from "react";
 import { FaInstagram, FaTiktok, FaTelegramPlane, FaYoutube, FaFacebook } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 import Link from "next/link";
-import Image from "next/image";
+import ScrollLinked from "@/components/ui/slider";
+import { motion } from "motion/react";
+import { useInView } from "framer-motion";
+
+/**
+ * Reusable fade-up component
+ */
+const FadeUpSection = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { amount: 0.2 });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ duration: 0.6, ease: "easeOut", delay }}
+    >
+      {children}
+    </motion.div>
+  );
+};
 
 const HomePage = () => {
   return (
-    <div className="min-h-svh w-full">
+    <div className="min-h-svh w-full bg-white">
       {/* Hero */}
       <div className="relative">
         <Hero
@@ -54,154 +77,116 @@ const HomePage = () => {
       {/* Tentang Kami Section */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full bg-white px-6 sm:px-10 py-10 sm:py-16">
         {/* Left Text */}
-        <div id="about" className="md:w-1/2 text-justify">
-          <div className="w-32 sm:w-64 h-2 bg-red-600 mb-4"></div>
-          <h2 className="text-3xl sm:text-5xl font-bold mb-6 text-black">Tentang Kami</h2>
-          <p className="text-gray-700 leading-relaxed mb-4 text-base sm:text-lg">
-            <span className="font-semibold text-black">FORKOMPI</span> adalah Forum Komunikasi
-            Mahasiswa Politeknik Kesehatan Se-Indonesia. Sejak didirikan pada tahun 2004, kami telah
-            berkomitmen untuk menjadi wadah sinergi antar Poltekkes Kemenkes se-Indonesia, dengan
-            tujuan utama meningkatkan kapabilitas dan revitalisasi sesuai dengan nilai-nilai
-            Pancasila dan Tri Dharma perguruan tinggi.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-4 text-base sm:text-lg">
-            Di FORKOMPI, kami memahami pentingnya interaksi yang efektif antar anggota untuk
-            mencapai tujuan bersama. Oleh karena itu, kami berupaya keras untuk meningkatkan
-            komunikasi antar Poltekkes Kemenkes Se-Indonesia, memfasilitasi kolaborasi yang lebih
-            baik dalam berbagai bidang kesehatan.
-          </p>
-          <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
-            Reformasi menjadi inti dari perjalanan kami. Kami tidak hanya ingin menjadi sebuah
-            forum, tetapi juga sebuah organisasi yang mampu menciptakan perubahan yang signifikan.
-            Melalui reformasi terus-menerus, kami berusaha untuk memperbaiki diri, mengikuti
-            perkembangan zaman, dan menjadi agen perubahan yang positif dalam lingkup Poltekkes
-            Kemenkes se-Indonesia.
-          </p>
-        </div>
+        <FadeUpSection delay={0.2}>
+          <div id="about" className="md:w-1/2 text-justify">
+            <div className="w-32 sm:w-64 h-2 bg-red-600 mb-4"></div>
+            <h2 className="text-3xl sm:text-5xl font-bold mb-6 text-black">Tentang Kami</h2>
+            <p className="text-gray-700 leading-relaxed mb-4 text-base sm:text-lg">
+              <span className="font-semibold text-black">FORKOMPI</span> adalah Forum Komunikasi
+              Mahasiswa Politeknik Kesehatan Se-Indonesia. Sejak didirikan pada tahun 2004, kami
+              telah berkomitmen untuk menjadi wadah sinergi antar Poltekkes Kemenkes se-Indonesia,
+              dengan tujuan utama meningkatkan kapabilitas dan revitalisasi sesuai dengan
+              nilai-nilai Pancasila dan Tri Dharma perguruan tinggi.
+            </p>
+            <p className="text-gray-700 leading-relaxed mb-4 text-base sm:text-lg">
+              Di FORKOMPI, kami memahami pentingnya interaksi yang efektif antar anggota untuk
+              mencapai tujuan bersama. Oleh karena itu, kami berupaya keras untuk meningkatkan
+              komunikasi antar Poltekkes Kemenkes Se-Indonesia, memfasilitasi kolaborasi yang lebih
+              baik dalam berbagai bidang kesehatan.
+            </p>
+            <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
+              Reformasi menjadi inti dari perjalanan kami. Kami tidak hanya ingin menjadi sebuah
+              forum, tetapi juga sebuah organisasi yang mampu menciptakan perubahan yang signifikan.
+              Melalui reformasi terus-menerus, kami berusaha untuk memperbaiki diri, mengikuti
+              perkembangan zaman, dan menjadi agen perubahan yang positif dalam lingkup Poltekkes
+              Kemenkes se-Indonesia.
+            </p>
+          </div>
+        </FadeUpSection>
 
         {/* Right Image */}
-        <div className="md:w-1/2 flex justify-center pt-6 md:pt-10">
-          <ImageShadowed src="/news_image_background.jpg" value={-16} color={"red"} />
-        </div>
+        <FadeUpSection delay={0.4}>
+          <div className="md:w-1/2 flex justify-end pt-6 md:pt-10">
+            <ImageShadowed src="/news_image_background.jpg" value={-16} color={"red"} />
+          </div>
+          <div className="md:w-1/2 hidden justify-end pt-6 md:pt-20 sm:flex">
+            <ImageShadowed src="/kongres.jpg" value={-16} color={"yellow"} />
+          </div>
+        </FadeUpSection>
       </div>
 
       {/* Visi Forkompi */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full bg-white px-6 sm:px-10 py-10 sm:py-16">
-        {/* Left Image */}
-        <div className="md:w-1/2 flex justify-center">
-          <ImageShadowed src="/kongres.jpg" value={-16} color={"yellow"} />
-        </div>
+      <FadeUpSection delay={0.2}>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full bg-white px-6 sm:px-10 py-10 sm:py-25">
+          {/* Left Image */}
 
-        {/* Right Text */}
-        <div className="md:w-1/2">
-          <div>
-            <div className="flex justify-end">
-              <div className="w-32 sm:w-64 h-2 bg-red-600 mb-4"></div>
+          <div className="md:w-1/2 flex justify-center">
+            <ImageShadowed src="/kongres.jpg" value={-16} color={"yellow"} />
+          </div>
+
+          {/* Right Text */}
+          <div className="md:w-1/2">
+            <div>
+              <div className="flex justify-end">
+                <div className="w-32 sm:w-64 h-2 bg-red-600 mb-4"></div>
+              </div>
+              <h2 className="text-3xl sm:text-5xl text-right font-bold mb-6 text-black">
+                Visi Forkompi
+              </h2>
+              <p className="text-right text-gray-700 leading-relaxed text-base sm:text-lg">
+                Visi kami adalah meningkatkan sinergi kapabilitas, serta revitalisasi antar
+                Poltekkes Kemenkes Se- Indonesia sesuai Pancasila dan Tri dharma perguruan tinggi.
+              </p>
             </div>
-            <h2 className="text-3xl sm:text-5xl text-right font-bold mb-6 text-black">
-              Visi Forkompi
-            </h2>
-            <p className="text-right text-gray-700 leading-relaxed text-base sm:text-lg">
-              Visi kami adalah meningkatkan sinergi kapabilitas, serta revitalisasi antar Poltekkes
-              Kemenkes Se- Indonesia sesuai Pancasila dan Tri dharma perguruan tinggi.
-            </p>
           </div>
         </div>
-      </div>
+      </FadeUpSection>
 
       {/* Misi Forkompi */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full bg-white px-6 sm:px-10 py-10 sm:py-16">
-        {/* Left Text */}
-        <div className="md:w-1/2">
-          <div>
-            <div className="w-32 sm:w-64 h-2 bg-red-600 mb-4"></div>
-            <h2 className="text-3xl sm:text-5xl text-left font-bold mb-6 text-black">
-              Misi Forkompi
-            </h2>
-            <span className="text-left text-gray-700 leading-relaxed text-base sm:text-lg">
-              Misi kami adalah memberdayakan remaja untuk menjalani masa transisi mereka dengan
-              sehat dan bahagia. Kami berkomitmen untuk:
-              <ul className="list-disc list-inside mt-2 space-y-1">
-                <li>Memberikan informasi yang akurat dan terpercaya.</li>
-                <li>Menyediakan dukungan untuk masalah kesehatan fisik dan mental.</li>
-                <li>Membangun komunitas yang mendukung pertumbuhan positif remaja.</li>
-              </ul>
-            </span>
+      <FadeUpSection delay={0.2}>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full bg-white px-6 sm:px-10 py-10 sm:py-30">
+          {/* Left Text */}
+          <div className="md:w-1/2">
+            <div>
+              <div className="w-32 sm:w-64 h-2 bg-red-600 mb-4"></div>
+              <h2 className="text-3xl sm:text-5xl text-left font-bold mb-6 text-black">
+                Misi Forkompi
+              </h2>
+              <span className="text-left text-gray-700 leading-relaxed text-base sm:text-lg">
+                Misi kami adalah memberdayakan remaja untuk menjalani masa transisi mereka dengan
+                sehat dan bahagia. Kami berkomitmen untuk:
+                <ul className="list-disc list-inside mt-2 space-y-1">
+                  <li>Memberikan informasi yang akurat dan terpercaya.</li>
+                  <li>Menyediakan dukungan untuk masalah kesehatan fisik dan mental.</li>
+                  <li>Membangun komunitas yang mendukung pertumbuhan positif remaja.</li>
+                </ul>
+              </span>
+            </div>
+          </div>
+
+          {/* Right Image */}
+          <div className="md:w-1/2 flex justify-center pt-6 md:pt-0">
+            <ImageShadowed src="/image3.jpg" value={-16} color={"green"} />
           </div>
         </div>
-
-        {/* Right Image */}
-        <div className="md:w-1/2 flex justify-center pt-6 md:pt-0">
-          <ImageShadowed src="/image3.jpg" value={-16} color={"green"} />
-        </div>
-      </div>
+      </FadeUpSection>
 
       {/* Kegiatan Forkompi */}
-      <div className="flex flex-col w-full bg-white px-6 sm:px-10 py-10 sm:py-16 justify-center">
-        <div className="flex flex-col items-center">
-          <div className="w-32 sm:w-64 h-2 bg-red-600 mb-4"></div>
-          <h2 className="text-3xl sm:text-5xl font-bold mb-10 sm:mb-12 text-black text-center">
-            Kegiatan Forkompi
-          </h2>
-        </div>
+      <FadeUpSection delay={0.2}>
+        <div className="flex flex-col w-full bg-white px-6 sm:px-10 py-10 sm:py-16 justify-center">
+          <div className="flex flex-col items-center">
+            <div className="w-32 sm:w-64 h-2 bg-red-600 mb-4"></div>
+            <h2 className="text-3xl sm:text-5xl font-bold mb-10 sm:mb-12 text-black text-center">
+              Kegiatan Forkompi
+            </h2>
+          </div>
 
-        {/* Top row */}
-        <div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="col-span-1 h-56 sm:h-80 lg:h-[450px]">
-              <Image
-                src="/home_image_background.jpg"
-                alt="Gallery 1"
-                width={600}
-                height={400}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="col-span-1 h-56 sm:h-80 lg:h-[450px]">
-              <Image
-                src="/news_image_background.jpg"
-                alt="Gallery 2"
-                width={600}
-                height={400}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="col-span-1 h-56 sm:h-80 lg:h-[450px]">
-              <Image
-                src="/kongres.jpg"
-                alt="Gallery 3"
-                width={600}
-                height={400}
-                className="w-full h-full object-cover"
-              />
-            </div>
+          {/* Bottom row */}
+          <div className="flex w-full justify-center">
+            <ScrollLinked />
           </div>
         </div>
-
-        {/* Bottom row */}
-        <div className="pt-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="col-span-1 h-64 sm:h-96 lg:h-[500px]">
-              <Image
-                src="/image3.jpg"
-                alt="Gallery 1"
-                width={1280}
-                height={720}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="col-span-1 h-64 sm:h-96 lg:h-[500px]">
-              <Image
-                src="/news_image_background2.jpg"
-                alt="Gallery 2"
-                width={1280}
-                height={720}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+      </FadeUpSection>
     </div>
   );
 };
