@@ -6,25 +6,23 @@ type LoginPayload = {
   username: string;
   password: string;
 };
+
+const unhandledError: ApiErrorResponse = {
+  success: false,
+  code: 500,
+  message: "Unhandled error",
+};
+
 export const doLogin = async (payload: LoginPayload): Promise<ApiResponse<{ token: string }>> => {
   try {
     const result: AxiosResponse<ApiResponse<{ token: string }>> = await axios.post(
-      "http://localhost:3000/api/login",
+      "/api/login",
       payload
     );
     return result.data;
   } catch (err) {
-    if (isAxiosError(err) && err.response) {
-      console.log(err.message);
-      return err.response.data as ApiErrorResponse;
-    }
-
-    const errorData: ApiErrorResponse = {
-      code: 500,
-      message: "Unhandled error",
-      success: false,
-    };
-    return errorData;
+    if (isAxiosError(err) && err.response) return err.response.data as ApiErrorResponse;
+    return unhandledError;
   }
 };
 
@@ -43,36 +41,25 @@ export const fetchAllNewsAdmin = async (
   token: string
 ): Promise<ApiResponse<News[]>> => {
   try {
-    const result: AxiosResponse<ApiResponse<News[]>> = await axios.get(
-      "http://localhost:3000/api/news",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        params: {
-          page,
-        },
-      }
-    );
+    const result: AxiosResponse<ApiResponse<News[]>> = await axios.get("/api/news", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        page,
+      },
+    });
     return result.data;
   } catch (error) {
-    if (isAxiosError(error) && error.response) {
-      console.log(error.message);
-      return error.response.data as ApiErrorResponse;
-    }
-    const errorData: ApiErrorResponse = {
-      code: 500,
-      message: "Unhandled error",
-      success: false,
-    };
-    return errorData;
+    if (isAxiosError(error) && error.response) return error.response.data as ApiErrorResponse;
+    return unhandledError;
   }
 };
 
 // TEST FETCH ADMIN OK
 // (async () => {
 //   const token =
-//     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoibW1hcnVmIiwiaWF0IjoxNzU5MzYxNTY1LCJleHAiOjE3NTkzNjUxNjV9.oTJrHQL0Dh7X3FW2U1dxhWbyUOnC0tHk4aL7UyBx-fA";
+//     "";
 
 //   const result = await fetchAllNewsAdmin(0, token);
 //   console.log(result);
@@ -80,26 +67,15 @@ export const fetchAllNewsAdmin = async (
 
 export const fetchAllNews = async (page: number = 1): Promise<ApiResponse<NewsResponse[]>> => {
   try {
-    const result: AxiosResponse<ApiResponse<NewsResponse[]>> = await axios.get(
-      "http://localhost:3000/api/news",
-      {
-        params: {
-          page,
-        },
-      }
-    );
+    const result: AxiosResponse<ApiResponse<NewsResponse[]>> = await axios.get("/api/news", {
+      params: {
+        page,
+      },
+    });
     return result.data;
   } catch (error) {
-    if (isAxiosError(error) && error.response) {
-      console.log(error.message);
-      return error.response.data as ApiErrorResponse;
-    }
-    const errorData: ApiErrorResponse = {
-      code: 500,
-      message: "Unhandled error",
-      success: false,
-    };
-    return errorData;
+    if (isAxiosError(error) && error.response) return error.response.data as ApiErrorResponse;
+    return unhandledError;
   }
 };
 
@@ -109,29 +85,104 @@ export const fetchAllNews = async (page: number = 1): Promise<ApiResponse<NewsRe
 //   console.log(result);
 // })();
 
-const fetchNews = async (id: number): Promise<ApiResponse<News>> => {
+export const fetchNews = async (id: number): Promise<ApiResponse<News>> => {
   try {
-    const result: AxiosResponse<ApiResponse<News>> = await axios.get(
-      `http://localhost:3000/api/news/${id}`,
-      {}
-    );
+    const result: AxiosResponse<ApiResponse<News>> = await axios.get(`/api/news/${id}`);
     return result.data;
   } catch (error) {
-    if (isAxiosError(error) && error.response) {
-      console.log(error);
-      return error.response.data as ApiErrorResponse;
-    }
+    if (isAxiosError(error) && error.response) return error.response.data as ApiErrorResponse;
 
-    return {
-      success: false,
-      code: 500,
-      message: "Unhandled error",
-    };
+    return unhandledError;
   }
 };
 
 // TEST FETCH ID OK
-(async () => {
-  const result = await fetchNews(2);
-  console.log(result);
-})();
+// (async () => {
+//   const result = await fetchNews(2);
+//   console.log(result);
+// })();
+
+export const postNewsDraft = async (
+  formData: FormData,
+  token: string
+): Promise<ApiResponse<string>> => {
+  try {
+    const result: AxiosResponse<ApiResponse<string>> = await axios.post(
+      "http://localhost:3000/api/news",
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return result.data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) return error.response.data as ApiErrorResponse;
+    return unhandledError;
+  }
+};
+
+export const updateNewsDraft = async (
+  formData: FormData,
+  token: string
+): Promise<ApiResponse<string>> => {
+  try {
+    const result: AxiosResponse<ApiResponse<string>> = await axios.put(
+      "http://localhost:3000/api/news",
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return result.data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) return error.response.data as ApiErrorResponse;
+    return unhandledError;
+  }
+};
+
+export const publishNewsDraft = async (
+  id: number,
+  formData: FormData,
+  token: string
+): Promise<ApiResponse<string>> => {
+  try {
+    const result: AxiosResponse<ApiResponse<string>> = await axios.patch(
+      `http://localhost:3000/api/news/${id}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return result.data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) return error.response.data as ApiErrorResponse;
+    return unhandledError;
+  }
+};
+
+export const deleteNews = async (id: number, token: string): Promise<ApiResponse<string>> => {
+  try {
+    const result: AxiosResponse<ApiResponse<string>> = await axios.delete(
+      `http://localhost:3000/api/news/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return result.data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) return error.response.data as ApiErrorResponse;
+    return unhandledError;
+  }
+};

@@ -52,7 +52,6 @@ const handler: NextApiHandler = async (
     const nr = await parseNewsRequest(req);
     if (!nr)
       return res.status(500).json({ success: false, code: 500, message: "error while parsing" });
-    console.log("nr : ", nr);
     const result = await editNewsDraft(nr);
     return res.status(result.code).json(result);
   }
