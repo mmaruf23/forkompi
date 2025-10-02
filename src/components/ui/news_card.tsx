@@ -1,16 +1,10 @@
+import type { NewsResponse } from "@/types/response";
+import { formatDate } from "@/utils/time";
 import Image from "next/image";
 import React from "react";
 import { HiShare } from "react-icons/hi";
 
-type NewsCardProps = {
-  title: string;
-  subtitle: string;
-  content: string;
-  image: string;
-  published_at: string;
-};
-
-const NewsCard = ({ title, subtitle, content, image, published_at }: NewsCardProps) => {
+const NewsCard = ({ title, subtitle, content, thumbnail_url, published_at }: NewsResponse) => {
   return (
     <div
       className="bg-red-700 
@@ -20,7 +14,7 @@ const NewsCard = ({ title, subtitle, content, image, published_at }: NewsCardPro
       {/* Image with fixed ratio for consistency */}
       <div className="w-full aspect-[4/3] relative">
         <Image
-          src={image}
+          src={thumbnail_url}
           alt="IMAGE"
           fill
           className="object-cover"
@@ -37,7 +31,7 @@ const NewsCard = ({ title, subtitle, content, image, published_at }: NewsCardPro
 
         <div className="flex-grow flex justify-between items-end pt-4 text-xs sm:text-sm md:text-base">
           <HiShare className="text-white text-lg md:text-xl lg:text-2xl" />
-          <p>{published_at}</p>
+          <p>{formatDate(new Date(published_at))}</p>
         </div>
       </div>
     </div>

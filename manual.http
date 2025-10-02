@@ -60,6 +60,7 @@ Content-Type: multipart/form-data; boundary=boundary_string
 --boundary_string
 Content-Disposition: form-data; name="title"
 
+Judul berita tiga.
 Berita terkini panas terbaru dan terjamin.
 --boundary_string
 Content-Disposition: form-data; name="subtitle"
@@ -120,4 +121,4 @@ DELETE http://localhost:3000/api/news/11
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1NjM2NzU2OCwiZXhwIjoxNzU2MzcxMTY4fQ.MZAQ2JOe-wZGtD9i0C3ETY8iZiOuyw4F2yaMyin3gMc
 
 ### TEST GET IMAGE ✅
-GET http://localhost:3000/file/images/1758804608669.png
+GET http://localhost:3000/file/images/1759414792741.png
