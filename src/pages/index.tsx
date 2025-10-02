@@ -34,7 +34,7 @@ const HomePage = () => {
   return (
     <div className="min-h-svh w-full bg-white">
       {/* Hero */}
-      <div className="relative">
+      <div className="relative hover:bg-red-300">
         <Hero
           title="forkompi"
           descp="Forum Komunikasi Mahasiswa Poltekkes Kemenkes Se Indonesia."
