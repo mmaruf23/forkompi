@@ -3,10 +3,10 @@ POST http://localhost:3000/api/register
 Content-Type: application/json
 
 {
-  "username": "mmaruf",
-  "firstName": "Muhammad Ma'ruf",
-  "lastName": "",
-  "password": "rahasia"
+  "username": "zain",
+  "firstName": "Zain",
+  "lastName": "Darma",
+  "password": "rahasia2"
 }
 
 ### TEST REGISTER ERROR ✅
@@ -25,13 +25,13 @@ POST http://localhost:3000/api/login
 Content-Type: application/json
 
 {
-  "username": "mmaruf",
-  "password": "rahasia"
+  "username": "zain",
+  "password": "rahasia2"
 }
 
 ### TEST GET PROFILE ✅
 GET http://localhost:3000/api/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c2VybmFtZSI6Im1tYXJ1ZiIsImlhdCI6MTc1ODgxMjQ1NCwiZXhwIjoxNzU4ODE2MDU0fQ.nlT--v2NubK_fE-qz7jVmzvft4Swuhpwaf0tNR2apyg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiemFpbiIsImlhdCI6MTc1OTQxNjg4NywiZXhwIjoxNzU5NDIwNDg3fQ.n1KeMxpb_u0mxirWRmrjw_FzPd3xkdGWd6LeBb1bV0U
 
 ### TEST UPDATE PROFILE ✅
 POST http://localhost:3000/api/profile
@@ -54,26 +54,26 @@ Content-Type: application/json
 
 ### TEST CREATE DRAFT NEWS ✅
 POST http://localhost:3000/api/news
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoibW1hcnVmIiwiaWF0IjoxNzU5MzA5MjMyLCJleHAiOjE3NTkzMTI4MzJ9.VBHBnlvGYSeIrbV7cZ-Eve5azlhJpMr4Rxj-b8TZEH4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiemFpbiIsImlhdCI6MTc1OTQxNTcwNywiZXhwIjoxNzU5NDE5MzA3fQ.qKUX5V2NgZ0EEK2uOiYXFDjWGBuJbNCd5nFsFf7iy1E
 Content-Type: multipart/form-data; boundary=boundary_string
 
 --boundary_string
 Content-Disposition: form-data; name="title"
 
-Judul berita sebelas.
+Berita terkini panas terbaru dan terjamin.
 --boundary_string
 Content-Disposition: form-data; name="subtitle"
 
-Sub-judul berita sebelas.
+Berita apa aja cuma nyoba doang balblablbalbalbal.
 --boundary_string
 Content-Disposition: form-data; name="content"
 
-Content berita sebelas.
+Berita apa aja cuma nyoba doang balblablbalbalbal.
 --boundary_string
 Content-Disposition: form-data; name="image"; filename="contoh.png"
 Content-Type: image/png
 
-< C:/Users/mmaruf23/Pictures/logo.png
+< C:\Users\Zain Darma\forkompi\public\image3.jpg
 --boundary_string--
 
 ### TEST GET NEWS SEBAGAI PUBLIC ✅
@@ -81,10 +81,10 @@ GET http://localhost:3000/api/news
 
 ### TEST GET NEWS SEBAGAI ADMIN ✅
 GET http://localhost:3000/api/news?page=2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoibW1hcnVmIiwiaWF0IjoxNzU5MzA5MjMyLCJleHAiOjE3NTkzMTI4MzJ9.VBHBnlvGYSeIrbV7cZ-Eve5azlhJpMr4Rxj-b8TZEH4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiemFpbiIsImlhdCI6MTc1OTQxNjg4NywiZXhwIjoxNzU5NDIwNDg3fQ.n1KeMxpb_u0mxirWRmrjw_FzPd3xkdGWd6LeBb1bV0U
 
 ### TEST GET NEWS BY ID ✅
-GET http://localhost:3000/api/news/11
+GET http://localhost:3000/api/news/1
 
 ### TEST EDIT NEWS ✅
 PUT http://localhost:3000/api/news
