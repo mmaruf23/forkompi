@@ -22,16 +22,23 @@ const handler: NextApiHandler = async (
 ) => {
   const authError = doAuth(req);
 
-  if (req.method == "GET") {
+  if (req.method == "GET" && !req.userId) {
     const page = req.query.page as string;
     console.log(req.userId ? "ada" : "gak ada");
-    const result = req.userId ? await getAllNews(page) : await getPublishedNews(page);
+    const result = await getPublishedNews(page);
     return res.status(result.code).json(result);
   }
 
   if (authError) {
     if (authError) return res.status(authError.code).json(authError);
   } // selain method get, authentikasi harus valid
+
+  if (req.method == "GET") {
+    const page = req.query.page as string;
+    console.log(req.userId ? "ada" : "gak ada");
+    const result = await getAllNews(page);
+    return res.status(result.code).json(result);
+  }
 
   if (req.method == "POST") {
     const nr = await parseNewsRequest(req);
@@ -45,7 +52,6 @@ const handler: NextApiHandler = async (
     const nr = await parseNewsRequest(req);
     if (!nr)
       return res.status(500).json({ success: false, code: 500, message: "error while parsing" });
-    console.log("nr : ", nr);
     const result = await editNewsDraft(nr);
     return res.status(result.code).json(result);
   }
