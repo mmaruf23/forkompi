@@ -137,7 +137,7 @@ export const getPublishedNews = async (
       "SELECT COUNT(*) as total FROM news WHERE status = 'published'"
     );
     const news = await query<ResultSelectQuery<JoinNews>>(
-      "SELECT n.title, n.subtitle, n.slug, n.thumbnail_url, n.content, u.first_name, u.last_name, n.published_at FROM news n LEFT JOIN users u ON n.author_id = u.id WHERE status = 'published' ORDER BY n.created_at DESC LIMIT ?, ?",
+      "SELECT n.title, n.subtitle, n.slug, n.thumbnail_url, n.content, u.first_name, u.last_name, n.published_at FROM news n LEFT JOIN users u ON n.author_id = u.id WHERE n.status = 'published' ORDER BY n.created_at DESC LIMIT ?, ?",
       [offset, per_page]
     );
     const { total } = count;
@@ -211,6 +211,33 @@ export const getNewsById = async (newsId: string): Promise<ApiResponse<News>> =>
       };
 
     return { success: true, code: 200, data: news[0] };
+  } catch (error) {
+    console.error(error);
+    return { success: false, code: 500, message: "error while getting news" };
+  }
+};
+
+export const getNewsBySlug = async (slug: string): Promise<ApiResponse<NewsResponse>> => {
+  try {
+    const news = await query<ResultSelectQuery<JoinNews>>(
+      "SELECT n.title, n.subtitle, n.slug, n.thumbnail_url, n.content, u.first_name, u.last_name, n.published_at FROM news n LEFT JOIN users u ON n.author_id = u.id WHERE slug = ?",
+      [slug]
+    );
+
+    if (!news.length)
+      return {
+        success: false,
+        code: 404,
+        message: "tidak ditemukan news dengan slug : " + slug,
+      };
+
+    const { first_name, last_name, ...rest } = news[0];
+
+    return {
+      success: true,
+      code: 200,
+      data: { ...rest, author: { first_name, last_name } },
+    };
   } catch (error) {
     console.error(error);
     return { success: false, code: 500, message: "error while getting news" };
