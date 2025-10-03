@@ -4,7 +4,7 @@ const dbConfig = {
   host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER || "root",
   password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
+  database: process.env.DB_NAME || "forkompi",
   waitForConnections: true,
   connectionLimit: 10, // Batasan koneksi untuk pool
   queueLimit: 0,
