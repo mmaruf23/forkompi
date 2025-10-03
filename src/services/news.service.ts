@@ -137,11 +137,11 @@ export const getPublishedNews = async (
       "SELECT COUNT(*) as total FROM news WHERE status = 'published'"
     );
     const news = await query<ResultSelectQuery<JoinNews>>(
-      "SELECT n.title, n.subtitle, n.slug, n.thumbnail_url, n.content, u.first_name, u.last_name, n.published_at FROM news n LEFT JOIN users u ON n.author_id = u.id WHERE status = 'published' ORDER BY n.created_at DESC LIMIT ? OFFSET ?",
-      [per_page, offset]
+      "SELECT n.title, n.subtitle, n.slug, n.thumbnail_url, n.content, u.first_name, u.last_name, n.published_at FROM news n LEFT JOIN users u ON n.author_id = u.id WHERE status = 'published' ORDER BY n.created_at DESC LIMIT ?, ?",
+      [offset, per_page]
     );
     const { total } = count;
-    const last_page = Math.floor(total / per_page) + 1;
+    const last_page = Math.floor(total / per_page);
     const from = news.length ? offset + 1 : 0;
     const to = news.length ? offset + news.length : 0;
 
@@ -176,11 +176,11 @@ export const getAllNews = async (pageNumber?: string): Promise<ApiResponse<News[
       "SELECT COUNT(*) as total FROM news"
     );
     const news = await query<ResultSelectQuery<News>>(
-      "SELECT * FROM news ORDER BY created_at DESC LIMIT ? OFFSET ?",
-      [per_page, offset]
+      "SELECT * FROM news ORDER BY created_at DESC LIMIT ?,  ?",
+      [offset, per_page]
     );
     const { total } = count;
-    const last_page = Math.floor(total / per_page) + 1;
+    const last_page = Math.floor(total / per_page);
     const from = news.length ? offset + 1 : 0;
     const to = news.length ? offset + news.length : 0;
 
