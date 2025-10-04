@@ -24,7 +24,6 @@ const handler: NextApiHandler = async (
 
   if (req.method == "GET" && !req.userId) {
     const page = req.query.page as string;
-    console.log(req.userId ? "ada" : "gak ada");
     const result = await getPublishedNews(page);
     return res.status(result.code).json(result);
   }
@@ -35,7 +34,6 @@ const handler: NextApiHandler = async (
 
   if (req.method == "GET") {
     const page = req.query.page as string;
-    console.log(req.userId ? "ada" : "gak ada");
     const result = await getAllNews(page);
     return res.status(result.code).json(result);
   }

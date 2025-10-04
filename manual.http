@@ -122,3 +122,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJ1c
 
 ### TEST GET IMAGE ✅
 GET http://localhost:3000/file/images/1759414792741.png
+
+### GET GET NEWS BY SLUG
+GET http://localhost:3000/api/news/slug?slug=ini-slug

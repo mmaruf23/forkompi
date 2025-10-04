@@ -22,7 +22,6 @@ const NewsPage = () => {
     };
 
     if (posts.length === 0) {
-      console.log("menjalankan fetchData");
       fetchData();
     }
   }, [dispatch, posts.length]);
@@ -38,7 +37,7 @@ const NewsPage = () => {
         </div>
 
         {/* News Blocks */}
-        <div className="flex flex-col sm:flex-row justify-between gap-8">
+        <div className="flex flex-col sm:flex-row sm:justify-between gap-8">
           {/* News Block 1 */}
           {highlight_one && (
             <div className="flex flex-col sm:flex-row bg-red-700 w-full sm:w-[650px] h-auto sm:h-[435px]">

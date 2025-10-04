@@ -26,16 +26,6 @@ export const doLogin = async (payload: LoginPayload): Promise<ApiResponse<{ toke
   }
 };
 
-// TEST LOGIN OK
-// (async () => {
-//   const payload: LoginPayload = {
-//     username: "mmaruf",
-//     password: "rahasia",
-//   };
-//   const result = await doLogin(payload);
-//   console.log(result);
-// })();
-
 export const fetchAllNewsAdmin = async (
   page: number = 1,
   token: string
@@ -56,15 +46,6 @@ export const fetchAllNewsAdmin = async (
   }
 };
 
-// TEST FETCH ADMIN OK
-// (async () => {
-//   const token =
-//     "";
-
-//   const result = await fetchAllNewsAdmin(0, token);
-//   console.log(result);
-// })();
-
 export const fetchAllNews = async (page: number = 1): Promise<ApiResponse<NewsResponse[]>> => {
   try {
     const result: AxiosResponse<ApiResponse<NewsResponse[]>> = await axios.get("/api/news", {
@@ -79,12 +60,6 @@ export const fetchAllNews = async (page: number = 1): Promise<ApiResponse<NewsRe
   }
 };
 
-// TEST FETCH OK
-// (async () => {
-//   const result = await fetchAllNews(1);
-//   console.log(result);
-// })();
-
 export const fetchNews = async (id: number): Promise<ApiResponse<News>> => {
   try {
     const result: AxiosResponse<ApiResponse<News>> = await axios.get(`/api/news/${id}`);
@@ -96,26 +71,31 @@ export const fetchNews = async (id: number): Promise<ApiResponse<News>> => {
   }
 };
 
-// TEST FETCH ID OK
-// (async () => {
-//   const result = await fetchNews(2);
-//   console.log(result);
-// })();
+export const fetchNewsBySlug = async (slug: string): Promise<ApiResponse<NewsResponse>> => {
+  try {
+    const result: AxiosResponse<ApiResponse<NewsResponse>> = await axios.get(`/api/news/slug`, {
+      params: {
+        slug,
+      },
+    });
+    return result.data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) return error.response.data as ApiErrorResponse;
+
+    return unhandledError;
+  }
+};
 
 export const postNewsDraft = async (
   formData: FormData,
   token: string
 ): Promise<ApiResponse<string>> => {
   try {
-    const result: AxiosResponse<ApiResponse<string>> = await axios.post(
-      "http://localhost:3000/api/news",
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const result: AxiosResponse<ApiResponse<string>> = await axios.post("/api/news", formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     return result.data;
   } catch (error) {
@@ -129,15 +109,11 @@ export const updateNewsDraft = async (
   token: string
 ): Promise<ApiResponse<string>> => {
   try {
-    const result: AxiosResponse<ApiResponse<string>> = await axios.put(
-      "http://localhost:3000/api/news",
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const result: AxiosResponse<ApiResponse<string>> = await axios.put("/api/news", formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     return result.data;
   } catch (error) {
@@ -153,7 +129,7 @@ export const publishNewsDraft = async (
 ): Promise<ApiResponse<string>> => {
   try {
     const result: AxiosResponse<ApiResponse<string>> = await axios.patch(
-      `http://localhost:3000/api/news/${id}`,
+      `/api/news/${id}`,
       formData,
       {
         headers: {
@@ -171,14 +147,11 @@ export const publishNewsDraft = async (
 
 export const deleteNews = async (id: number, token: string): Promise<ApiResponse<string>> => {
   try {
-    const result: AxiosResponse<ApiResponse<string>> = await axios.delete(
-      `http://localhost:3000/api/news/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const result: AxiosResponse<ApiResponse<string>> = await axios.delete(`/api/news/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     return result.data;
   } catch (error) {
