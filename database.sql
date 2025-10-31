@@ -19,8 +19,6 @@ CREATE TABLE news (
     content MEDIUMTEXT NOT NULL,
     author_id BIGINT UNSIGNED NOT NULL,
     status ENUM('draft', 'pending', 'published', 'archived', 'deleted') NOT NULL DEFAULT 'draft',
---    views_count BIGINT UNSIGNED DEFAULT 0,
-
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     published_at TIMESTAMP NULL DEFAULT NULL,
