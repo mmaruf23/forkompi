@@ -54,14 +54,14 @@ Content-Type: application/json
 
 ### TEST CREATE DRAFT NEWS ✅
 POST http://localhost:3000/api/news
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiemFpbiIsImlhdCI6MTc1OTQxNTcwNywiZXhwIjoxNzU5NDE5MzA3fQ.qKUX5V2NgZ0EEK2uOiYXFDjWGBuJbNCd5nFsFf7iy1E
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiemFpbiIsImlhdCI6MTc1OTUxNjA5MiwiZXhwIjoxNzU5NTE5NjkyfQ.eR49JsgsmdnpxCEdJzmg3aMu1VFHoj7j0DuxMk1-soU
 Content-Type: multipart/form-data; boundary=boundary_string
 
 --boundary_string
 Content-Disposition: form-data; name="title"
 
 Judul berita tiga.
-Berita terkini panas terbaru dan terjamin.
+Berita terkini part 2 panas terbaru dan terjamin.
 --boundary_string
 Content-Disposition: form-data; name="subtitle"
 
@@ -82,7 +82,7 @@ GET http://localhost:3000/api/news
 
 ### TEST GET NEWS SEBAGAI ADMIN ✅
 GET http://localhost:3000/api/news?page=2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiemFpbiIsImlhdCI6MTc1OTQxNjg4NywiZXhwIjoxNzU5NDIwNDg3fQ.n1KeMxpb_u0mxirWRmrjw_FzPd3xkdGWd6LeBb1bV0U
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiemFpbiIsImlhdCI6MTc1OTUxNjA5MiwiZXhwIjoxNzU5NTE5NjkyfQ.eR49JsgsmdnpxCEdJzmg3aMu1VFHoj7j0DuxMk1-soU
 
 ### TEST GET NEWS BY ID ✅
 GET http://localhost:3000/api/news/1
