@@ -11,9 +11,10 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { href: "/", label: "Home" },
-  { href: "/#about", label: "About" },
+  { href: "/about", label: "About" },
   { href: "/news", label: "News" },
   { href: "/program", label: "Program" },
+  { href: "/program", label: "Contact" },
   // { href: '/linimasa', label: 'Linimasa' },
 ];
 
@@ -23,11 +24,11 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="w-full bg-transparent font-bold px-6 md:px-16 py-6 absolute top-0 z-10">
+    <nav className="w-full bg-white font-bold px-6 md:px-16 py-2">
       <div className="mx-auto flex justify-between items-center text-xl">
         {/* Logo */}
         <Link href="/" className="font-bold">
-          <Image src={"/forkompi-logo.png"} alt="forkompi-logo" width={80} height={80} priority />
+          <Image src={"/forkompi-logo.png"} alt="forkompi-logo" width={60} height={60} priority />
         </Link>
 
         {/* Desktop Menu */}
@@ -36,8 +37,8 @@ const Navbar = () => {
             <li key={item.href}>
               <Link
                 href={item.href}
-                className={`hover:underline underline-offset-2 text-xl ${
-                  pathname == item.href ? "text-outline" : "text-red-600"
+                className={`hover:underline tracking-widest font-thin text-xl ${
+                  pathname == item.href ? "underline text-black" : "text-black"
                 }`}
               >
                 {item.label}
