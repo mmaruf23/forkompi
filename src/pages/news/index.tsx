@@ -82,7 +82,7 @@ const NewsPage = () => {
         </div>
 
         {/* News List */}
-        <div className="sm:mt-40 grid sm:grid-cols-2 grid-cols-2 mt-20 lg:grid-cols-4 gap-4 sm:gap-8">
+        <div className="sm:mt-40 grid sm:grid-cols-3 grid-cols-2 mt-20 gap-8 sm:gap-20">
           {posts.length && posts.map((n, i) => <NewsCard {...n} key={i} />)}
         </div>
 
