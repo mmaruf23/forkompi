@@ -16,7 +16,7 @@ const NewsCard = ({
   return (
     <div
       className="bg-red-700 
-      w-full sm:w-[280px] md:w-[320px] lg:w-[360px] xl:w-[400px] 
+      w-full
       rounded-br-4xl rounded-tl-4xl overflow-hidden shadow-lg"
     >
       {/* Image with fixed ratio for consistency */}

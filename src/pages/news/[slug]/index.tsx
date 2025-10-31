@@ -50,7 +50,7 @@ const NewsDetailPage = () => {
     }
   }, [dispatch, posts, posts.length, router.query.slug]);
   return (
-    <div className="min-h-[200svh] w-full">
+    <div className="min-h-[200svh] w-full bg-white text-black">
       {newsResponse ? (
         <Hero
           title={newsResponse.title}
