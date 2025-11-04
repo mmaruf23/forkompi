@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 type HeroProps = {
@@ -10,14 +11,22 @@ const Hero = ({ title, descp, imageSrc }: HeroProps) => {
   return (
     <div className="bg-white">
       <div
-        className="relative flex justify-center items-center w-full min-h-[70vh] sm:min-h-[80vh] md:min-h-screen bg-no-repeat bg-cover bg-bottom"
+        className="relative flex justify-center items-center w-full min-h-[70vh] sm:min-h-[80vh] md:min-h-screen overflow-hidden"
         style={{
           clipPath: "polygon(0% 0%, 100% 0%, 100% 75%, 0 95%)",
-          backgroundImage: `url('${imageSrc}')`,
         }}
       >
+        {/* Optimized Background Image */}
+        <Image
+          src={imageSrc}
+          alt={title || "Background"}
+          fill
+          priority
+          className="object-cover object-bottom"
+        />
+
         {/* Overlay */}
-        <div className="absolute inset-0 bg-red-700/50"></div>
+        <div className="absolute inset-0 bg-red-700/50" />
 
         {/* Content */}
         <div className="z-20 text-white px-4 sm:px-6 md:px-12 text-center">
