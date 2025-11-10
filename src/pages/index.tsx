@@ -39,7 +39,7 @@ const HomePage = () => {
         <Hero
           title="forkompi"
           descp="Forum Komunikasi Mahasiswa Poltekkes Kemenkes Se Indonesia."
-          imageSrc="/Home.JPG"
+          imageSrc="/assets/images/Home.JPG"
         />
         {/* Button at the bottom center of Hero */}{" "}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-green-700 text-white px-6 py-4 rounded-sm shadow-lg transition">

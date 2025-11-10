@@ -59,7 +59,11 @@ const NewsDetailPage = () => {
         />
       ) : (
         // todo : bikin hero skeleton kalau mau
-        <Hero title={"News"} descp={formatDate(new Date(2025, 1, 8))} imageSrc={"/Home.JPG"} />
+        <Hero
+          title={"News"}
+          descp={formatDate(new Date(2025, 1, 8))}
+          imageSrc={"/assets/images/Home.JPG"}
+        />
       )}
 
       <div className="relative px-60 my-20">

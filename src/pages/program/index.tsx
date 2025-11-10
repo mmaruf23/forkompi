@@ -4,32 +4,32 @@ import React from "react";
 const programs = [
   {
     title: "Program 1",
-    image: "/Kegiatan1.jpg",
+    image: "/assets/images/Kegiatan1.jpg",
     desc: "Deskripsi singkat program, misalnya program ini adalah program unggulan forkompi yang dilaksanakan setiap tahunnya bla bla bla",
   },
   {
     title: "Program 2",
-    image: "/Kegiatan2.jpg",
+    image: "/assets/images/Kegiatan2.jpg",
     desc: "Deskripsi singkat program, misalnya program ini adalah program unggulan forkompi yang dilaksanakan setiap tahunnya bla bla bla",
   },
   {
     title: "Program 3",
-    image: "/Kegiatan3.jpg",
+    image: "/assets/images/Kegiatan3.jpg",
     desc: "Deskripsi singkat program, misalnya program ini adalah program unggulan forkompi yang dilaksanakan setiap tahunnya bla bla bla",
   },
   {
     title: "Program 4",
-    image: "/Kegiatan4.jpg",
+    image: "/assets/images/Kegiatan4.jpg",
     desc: "Deskripsi singkat program, misalnya program ini adalah program unggulan forkompi yang dilaksanakan setiap tahunnya bla bla bla",
   },
   {
     title: "Program 5",
-    image: "/Kegiatan5.jpg",
+    image: "/assets/images/Kegiatan5.jpg",
     desc: "Deskripsi singkat program, misalnya program ini adalah program unggulan forkompi yang dilaksanakan setiap tahunnya bla bla bla",
   },
   {
     title: "Program 6",
-    image: "/Kegiatan6.jpg",
+    image: "/assets/images/Kegiatan6.jpg",
     desc: "Deskripsi singkat program, misalnya program ini adalah program unggulan forkompi yang dilaksanakan setiap tahunnya bla bla bla",
   },
 ];
@@ -40,7 +40,7 @@ const ProgranPage = () => {
       <Hero
         title="program"
         descp="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, tenetur."
-        imageSrc="/Program.JPG"
+        imageSrc="/assets/images/Program.JPG"
       />
 
       <div className="px-4 sm:px-14 pb-10">

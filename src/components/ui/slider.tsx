@@ -25,7 +25,7 @@ export default function ScrollLinked() {
       >
         <li className="relative flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#ff0088]">
           <Image
-            src="/Kegiatan1.JPG"
+            src="/assets/images/Kegiatan1.JPG"
             alt="Kegiatan1"
             fill
             className="object-cover"
@@ -34,7 +34,7 @@ export default function ScrollLinked() {
         </li>
         <li className="relative flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#dd00ee]">
           <Image
-            src="/Kegiatan2.JPG"
+            src="/assets/images/Kegiatan2.JPG"
             alt="Kegiatan2"
             fill
             className="object-cover"
@@ -43,7 +43,7 @@ export default function ScrollLinked() {
         </li>
         <li className="relative flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#9911ff]">
           <Image
-            src="/Kegiatan3.JPG"
+            src="/assets/images/Kegiatan3.JPG"
             alt="Kegiatan3"
             fill
             className="object-cover"
@@ -52,7 +52,7 @@ export default function ScrollLinked() {
         </li>
         <li className="relative flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#0d63f8]">
           <Image
-            src="/Kegiatan4.JPG"
+            src="/assets/images/Kegiatan4.JPG"
             alt="Kegiatan4"
             fill
             className="object-cover"
@@ -61,7 +61,7 @@ export default function ScrollLinked() {
         </li>
         <li className="relative flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#0cdcf7]">
           <Image
-            src="/Kegiatan5.JPG"
+            src="/assets/images/Kegiatan5.JPG"
             alt="Kegiatan5"
             fill
             className="object-cover"
@@ -70,7 +70,7 @@ export default function ScrollLinked() {
         </li>
         <li className="relative flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#8df0cc]">
           <Image
-            src="/Kegiatan6.JPG"
+            src="/assets/images/Kegiatan6.JPG"
             alt="Kegiatan6"
             fill
             className="object-cover"
@@ -79,7 +79,7 @@ export default function ScrollLinked() {
         </li>
         <li className="relative flex-[0_0_160px] sm:flex-[0_0_400px] bg-[#8df0ac]">
           <Image
-            src="/Kegiatan7.JPG"
+            src="/assets/images/Kegiatan7.JPG"
             alt="Kegiatan7"
             fill
             className="object-cover"

@@ -37,7 +37,7 @@ const HomePage = () => {
         <Hero
           title="forkompi"
           descp="Forum Komunikasi Mahasiswa Poltekkes Kemenkes Se Indonesia."
-          imageSrc="/Home.JPG"
+          imageSrc="/assets/images/Home.JPG"
         />
         {/* Button at the bottom center of Hero */}{" "}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-red-700 text-white px-6 py-4 rounded-sm shadow-lg transition">
@@ -106,10 +106,10 @@ const HomePage = () => {
         {/* Right Image */}
         <FadeUpSection delay={0.4}>
           <div className="md:w-1/2 flex justify-end pt-6 md:pt-10">
-            <ImageShadowed src="/Tentang1.JPG" value={-16} color={"red"} />
+            <ImageShadowed src="/assets/images/Tentang1.JPG" value={-16} color={"red"} />
           </div>
           <div className="md:w-1/2 hidden justify-end pt-6 md:pt-20 sm:flex">
-            <ImageShadowed src="/Tentang2.JPG" value={-16} color={"yellow"} />
+            <ImageShadowed src="/assets/images/Tentang2.JPG" value={-16} color={"yellow"} />
           </div>
         </FadeUpSection>
       </div>
@@ -120,7 +120,7 @@ const HomePage = () => {
           {/* Left Image */}
 
           <div className="md:w-1/2 flex justify-center">
-            <ImageShadowed src="/Visi.JPG" value={-16} color={"yellow"} />
+            <ImageShadowed src="/assets/images/Visi.JPG" value={-16} color={"yellow"} />
           </div>
 
           {/* Right Text */}
@@ -165,7 +165,7 @@ const HomePage = () => {
 
           {/* Right Image */}
           <div className="md:w-1/2 flex justify-center pt-6 md:pt-0">
-            <ImageShadowed src="/Misi.JPG" value={-16} color={"green"} />
+            <ImageShadowed src="/assets/images/Misi.JPG" value={-16} color={"green"} />
           </div>
         </div>
       </FadeUpSection>

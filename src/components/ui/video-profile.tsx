@@ -5,7 +5,7 @@ const VideoProfile = () => {
     <section
       className="w-full h-auto flex justify-center items-center mt-20 py-20"
       style={{
-        backgroundImage: "url('/red-batik.jpg')",
+        backgroundImage: "url('/assets/images/red-batik.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

@@ -28,7 +28,13 @@ const Navbar = () => {
       <div className="mx-auto flex justify-between items-center text-xl">
         {/* Logo */}
         <Link href="/" className="font-bold">
-          <Image src={"/forkompi-logo.png"} alt="forkompi-logo" width={60} height={60} priority />
+          <Image
+            src={"/assets/images/forkompi-logo.png"}
+            alt="forkompi-logo"
+            width={60}
+            height={60}
+            priority
+          />
         </Link>
 
         {/* Desktop Menu */}

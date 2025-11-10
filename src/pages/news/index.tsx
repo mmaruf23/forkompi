@@ -29,7 +29,11 @@ const NewsPage = () => {
   const [highlight_one, highlight_two] = posts;
   return (
     <div className="min-h-svh w-full bg-white">
-      <Hero title="news" descp="Berita Terbaru dan Terpercaya di Forkompi." imageSrc="/News.JPG" />
+      <Hero
+        title="news"
+        descp="Berita Terbaru dan Terpercaya di Forkompi."
+        imageSrc="/assets/images/News.JPG"
+      />
       <div className="px-4 sm:px-14">
         <div className="my-10 sm:my-20">
           <div className="w-32 sm:w-64 h-2 bg-red-600 mb-4"></div>
