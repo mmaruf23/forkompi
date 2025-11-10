@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <link rel="icon" href="/forkompi-logo.png" />
+        <link rel="icon" href="/assets/images/forkompi-logo.png" />
       </Head>
       <body className="antialiased">
         <Main />
